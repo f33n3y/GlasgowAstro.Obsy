@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlasgowAstro.Obsy.DataGrabber", "GlasgowAstro.Obsy\GlasgowAstro.Obsy.DataGrabber.csproj", "{3351E7C1-46B6-4BF8-B1C5-F006DC6052F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlasgowAstro.Obsy.DataGrabber", "GlasgowAstro.Obsy.DataGrabber\GlasgowAstro.Obsy.DataGrabber.csproj", "{3351E7C1-46B6-4BF8-B1C5-F006DC6052F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

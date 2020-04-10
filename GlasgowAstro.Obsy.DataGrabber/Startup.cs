@@ -1,9 +1,8 @@
 ﻿using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Http;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Net;
+using System.Net.Http;
 
 [assembly: FunctionsStartup(typeof(GlasgowAstro.Obsy.DataGrabber.Startup))]
 
@@ -13,7 +12,7 @@ namespace GlasgowAstro.Obsy.DataGrabber
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            builder.Services.AddHttpClient();
+            builder.Services.AddHttpClient<MPCDataGrabber>("DataGrabberClient");
         }
     }
 }
