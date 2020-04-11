@@ -1,0 +1,10 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "ObsDataUrl": "https://minorplanetcenter.net/Extended_Files/mpcorb_extended.json.gz",
+    "ObsDataFileName": "mpcdata.json",
+    "ObsDataFolderName": "MPCData"
+  }
+}
