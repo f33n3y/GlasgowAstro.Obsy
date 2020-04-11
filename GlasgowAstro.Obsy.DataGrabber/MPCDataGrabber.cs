@@ -1,9 +1,12 @@
+using GlasgowAstro.Obsy.DataGrabber.Models;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.DataGrabber
@@ -26,6 +29,7 @@ namespace GlasgowAstro.Obsy.DataGrabber
             log.LogInformation($"MPCDataGrabber Timer trigger function executed at: {DateTime.Now}");
 
             var tempDir = Path.Combine(Path.GetTempPath(), FolderName);
+
             if (!Directory.Exists(tempDir))
             {
                 Directory.CreateDirectory(tempDir);
@@ -43,8 +47,12 @@ namespace GlasgowAstro.Obsy.DataGrabber
                 }
             }
 
-            // Read file...
-            // Deserialize into model...
+            // Read file and deserialize 
+            //using (FileStream fs = File.OpenRead($"{tempDir}\\{FileName}"))
+            //{
+            //    var asteroids = await JsonSerializer.DeserializeAsync<List<Asteroid>>(fs);
+            //}
+
             // Store...
         }
     }
