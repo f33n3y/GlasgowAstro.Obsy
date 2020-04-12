@@ -1,4 +1,5 @@
 ﻿using GlasgowAstro.Obsy.Data.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.Data
@@ -7,6 +8,6 @@ namespace GlasgowAstro.Obsy.Data
     {
         Task<TDocument> FindByIdAsync(string id);
 
-        Task<TDocument> FindByNameAsync(string name);
+        Task InsertManyAsync(ICollection<TDocument> documents);
     }
 }

@@ -4,7 +4,7 @@ using System;
 
 namespace GlasgowAstro.Obsy.Data.Models
 {
-    public class IDocument
+    public interface IDocument
     {
         [BsonId]
         [BsonRepresentation(BsonType.String)]
