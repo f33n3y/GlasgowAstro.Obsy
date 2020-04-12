@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GlasgowAstro.Obsy.Data;
+using GlasgowAstro.Obsy.DataGrabber.Contracts;
 using GlasgowAstro.Obsy.DataGrabber.MapperProfiles;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
@@ -24,9 +25,10 @@ namespace GlasgowAstro.Obsy.DataGrabber
             config.AddEnvironmentVariables();            
             builder.Services.AddSingleton<IConfiguration>(config.Build());
 
-            builder.Services.AddSingleton(typeof(IRepository<>), typeof(MongoRepository<>));
             builder.Services.AddHttpClient();
             builder.Services.AddAutoMapper(profileAssemblyMarkerTypes: typeof(AsteroidProfile));
+            builder.Services.AddSingleton(typeof(IRepository<>), typeof(MongoRepository<>));
+            builder.Services.AddSingleton<IFileDownloader, FileDownloader>();
         }
     }
 }
