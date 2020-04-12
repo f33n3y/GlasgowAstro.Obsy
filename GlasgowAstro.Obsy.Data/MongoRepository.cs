@@ -1,5 +1,6 @@
 ﻿using GlasgowAstro.Obsy.Data.Attributes;
 using GlasgowAstro.Obsy.Data.Models;
+using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -12,11 +13,12 @@ namespace GlasgowAstro.Obsy.Data
     public class MongoRepository<TDocument> : IRepository<TDocument>
         where TDocument : IDocument
     {
-        private readonly IMongoCollection<TDocument> _collection;        
+        private readonly IMongoCollection<TDocument> _collection;
 
-        public MongoRepository()
+        public MongoRepository(IConfiguration configuration)
         {
-            var database = new MongoClient("").GetDatabase(""); // TODO Pull from appsettings
+            var database = new MongoClient(configuration["MongoDbConnection:ConnectionString"])
+                .GetDatabase(configuration["MongoDbConnection:Database"]);
             _collection = database.GetCollection<TDocument>(GetCollectionName(typeof(TDocument)));
         }
 
@@ -29,12 +31,12 @@ namespace GlasgowAstro.Obsy.Data
         }
 
         public virtual Task<TDocument> FindByIdAsync(string id)
-        {                
+        {
             return Task.Run(() =>
             {
                 var objectId = new ObjectId(id);
                 var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, objectId);
-                return _collection.Find(filter).SingleOrDefaultAsync();                
+                return _collection.Find(filter).SingleOrDefaultAsync();
             });
         }
 

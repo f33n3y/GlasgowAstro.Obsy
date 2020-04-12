@@ -1,16 +1,13 @@
-using GlasgowAstro.Obsy.DataGrabber.Models;
+using GlasgowAstro.Obsy.Data;
+using GlasgowAstro.Obsy.Data.Models;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
-using GlasgowAstro.Obsy.Data;
-using Microsoft.AspNetCore.Mvc.Formatters.Internal;
 
 namespace GlasgowAstro.Obsy.DataGrabber
 {
@@ -18,11 +15,13 @@ namespace GlasgowAstro.Obsy.DataGrabber
     {
         private readonly HttpClient _client;
         private readonly IConfiguration _config;        
+        private readonly IRepository<Asteroid> _asteroidRepository;        
 
-        public MPCDataGrabber(HttpClient client, IConfiguration configuration)
+        public MPCDataGrabber(HttpClient client, IConfiguration config, IRepository<Asteroid> asteroidRepository)
         {
             _client = client;
-            _config = configuration;
+            _config = config;
+            _asteroidRepository = asteroidRepository;
         }
 
         [FunctionName("MPCDataGrabber")]
@@ -54,12 +53,16 @@ namespace GlasgowAstro.Obsy.DataGrabber
                     }
                 }
 
+                // TEST
                 //using (FileStream fs = File.OpenRead($"{tempDir}\\{fileName}"))
                 //{
                 //    var asteroids = await JsonSerializer.DeserializeAsync<List<Asteroid>>(fs);
                 //}
-            }
 
+                // TEST
+                //var test1 = await _asteroidRepository.FindByIdAsync("5e926c831c9d44000053be96");
+                //var test2 = await _asteroidRepository.InsertManyAsync(documents);
+            }
         }
     }
 }

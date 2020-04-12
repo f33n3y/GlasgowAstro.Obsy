@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.Functions.Extensions.DependencyInjection;
+﻿using GlasgowAstro.Obsy.Data;
+using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -19,9 +20,9 @@ namespace GlasgowAstro.Obsy.DataGrabber
                 config.AddUserSecrets<Startup>(false);
             }
             config.AddEnvironmentVariables();            
-
             builder.Services.AddSingleton<IConfiguration>(config.Build());
 
+            builder.Services.AddSingleton(typeof(IRepository<>), typeof(MongoRepository<>));
             builder.Services.AddHttpClient();
         }
     }
