@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace GlasgowAstro.Obsy.DataGrabber.Models
 {
@@ -27,7 +28,7 @@ namespace GlasgowAstro.Obsy.DataGrabber.Models
         /// Other provisional designations (if they exist)
         /// </summary>
         [JsonPropertyName("Other_desigs")]
-        public string OtherDesignation { get; set; }
+        public List<string> OtherDesignation { get; set; }
 
         /// <summary>
         /// Absolute magnitude
