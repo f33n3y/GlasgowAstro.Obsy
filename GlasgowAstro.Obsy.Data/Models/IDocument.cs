@@ -1,6 +1,5 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System;
 
 namespace GlasgowAstro.Obsy.Data.Models
 {
@@ -9,7 +8,5 @@ namespace GlasgowAstro.Obsy.Data.Models
         [BsonId]
         [BsonRepresentation(BsonType.String)]
         public ObjectId Id { get; set; }
-
-        public DateTime CreatedAt { get; }
     }
 }
