@@ -42,11 +42,11 @@ namespace GlasgowAstro.Obsy.DataGrabber
                 IEnumerable<Models.Asteroid> asteroids;
                 using (FileStream fileStream = File.OpenRead(filePath))
                 {
-                    asteroids = await JsonSerializer.DeserializeAsync<List<Models.Asteroid>>(fileStream); // Do this in batches?                
+                    asteroids = await JsonSerializer.DeserializeAsync<List<Models.Asteroid>>(fileStream);            
                     log.LogInformation("File deserialized");
                 }
 
-                // TODO Fix float accuracy issue
+                // TODO Fix float accuracy issue, TODO exception handling
                 ICollection<Asteroid> documents = _mapper.Map<IEnumerable<Models.Asteroid>, IEnumerable<Asteroid>>(asteroids).ToList();
 
                 var documentsToUpsert = new List<WriteModel<Asteroid>>();
@@ -59,6 +59,7 @@ namespace GlasgowAstro.Obsy.DataGrabber
                     });
                 }
                 await _asteroidRepository.BulkWriteAsync(documentsToUpsert);
+                log.LogInformation("Bulk upsert completed");
 
                 // NOTE: Clear collection and rebuild it until bulk upsert works properly
                 //await _asteroidRepository.DeleteManyAsync(Builders<Asteroid>.Filter.Empty);
