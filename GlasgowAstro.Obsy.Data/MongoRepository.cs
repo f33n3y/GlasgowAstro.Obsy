@@ -35,10 +35,9 @@ namespace GlasgowAstro.Obsy.Data
             await _collection.InsertManyAsync(documents);
         }
 
-        public virtual async Task UpdateOrInsertManyAsync(ICollection<TDocument> documents,
-            FilterDefinition<TDocument> filter, UpdateDefinition<TDocument> update)
+        public virtual async Task BulkWriteAsync(IEnumerable<WriteModel<TDocument>> documents)
         {
-            //await _collection.UpdateManyAsync(filter, update, new UpdateOptions { IsUpsert = true });
+            BulkWriteResult res = await _collection.BulkWriteAsync(documents, new BulkWriteOptions { IsOrdered = false });
         }
 
         public virtual async Task DeleteManyAsync(FilterDefinition<TDocument> filter)

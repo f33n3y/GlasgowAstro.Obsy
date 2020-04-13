@@ -9,8 +9,7 @@ namespace GlasgowAstro.Obsy.Data.Abstractions
     {
         Task InsertManyAsync(ICollection<TDocument> documents);
 
-        Task UpdateOrInsertManyAsync(ICollection<TDocument> documents,
-            FilterDefinition<TDocument> filter, UpdateDefinition<TDocument> update);
+        Task BulkWriteAsync(IEnumerable<WriteModel<TDocument>> documents);
 
         Task DeleteManyAsync(FilterDefinition<TDocument> filter);
     }

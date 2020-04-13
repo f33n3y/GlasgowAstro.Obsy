@@ -23,7 +23,7 @@ namespace GlasgowAstro.Obsy.DataGrabber
 
         public MPCDataGrabber(IConfiguration config, IMongoRepository<Data.Models.Asteroid> asteroidRepository,
             IMapper mapper, IFileDownloader downloader)
-        {   
+        {
             _config = config;
             _asteroidRepository = asteroidRepository;
             _mapper = mapper;
@@ -43,13 +43,28 @@ namespace GlasgowAstro.Obsy.DataGrabber
                 using (FileStream fileStream = File.OpenRead(filePath))
                 {
                     asteroids = await JsonSerializer.DeserializeAsync<List<Models.Asteroid>>(fileStream); // Do this in batches?                
-                    log.LogInformation("File deserialized");                   
+                    log.LogInformation("File deserialized");
                 }
 
-                //await _asteroidRepository.DeleteManyAsync(Builders<Asteroid>.Filter.Empty); 
+                // TODO Fix float accuracy issue
                 ICollection<Asteroid> documents = _mapper.Map<IEnumerable<Models.Asteroid>, IEnumerable<Asteroid>>(asteroids).ToList();
-                //await _asteroidRepository.InsertManyAsync(documents); // TODO Make this InsertOrUpdate "upsert"   
-                log.LogInformation("DB updated");
+
+                var documentsToUpsert = new List<WriteModel<Asteroid>>();
+                foreach (var doc in documents)
+                {
+                    var filter = Builders<Asteroid>.Filter.Eq(x => x.CompoId, doc.CompoId);
+                    documentsToUpsert.Add(new ReplaceOneModel<Asteroid>(filter, doc)
+                    {
+                        IsUpsert = true
+                    });
+                }
+                await _asteroidRepository.BulkWriteAsync(documentsToUpsert);
+
+                // NOTE: Clear collection and rebuild it until bulk upsert works properly
+                //await _asteroidRepository.DeleteManyAsync(Builders<Asteroid>.Filter.Empty);
+                //log.LogInformation("Collection cleared");
+                //await _asteroidRepository.InsertManyAsync(documents);
+                //log.LogInformation("Collection rebuilt");
             }
         }
     }
