@@ -59,7 +59,7 @@ namespace GlasgowAstro.Obsy.DataGrabber
                     });
                 }
                 await _asteroidRepository.BulkWriteAsync(documentsToUpsert);
-                log.LogInformation("Bulk upsert completed");
+                log.LogInformation("Bulk write completed");
 
                 // NOTE: Clear collection and rebuild it until bulk upsert works properly
                 //await _asteroidRepository.DeleteManyAsync(Builders<Asteroid>.Filter.Empty);
