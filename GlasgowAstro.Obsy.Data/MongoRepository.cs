@@ -1,7 +1,7 @@
-﻿using GlasgowAstro.Obsy.Data.Attributes;
+﻿using GlasgowAstro.Obsy.Data.Abstractions;
+using GlasgowAstro.Obsy.Data.Attributes;
 using GlasgowAstro.Obsy.Data.Models;
 using Microsoft.Extensions.Configuration;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.Data
 {
-    public class MongoRepository<TDocument> : IRepository<TDocument>
+    public class MongoRepository<TDocument> : IMongoRepository<TDocument>
         where TDocument : IDocument
     {
         private readonly IMongoCollection<TDocument> _collection;
@@ -30,19 +30,20 @@ namespace GlasgowAstro.Obsy.Data
                 .FirstOrDefault())?.CollectionName;
         }
 
-        public virtual Task<TDocument> FindByIdAsync(string id)
-        {
-            return Task.Run(() =>
-            {
-                var objectId = new ObjectId(id);
-                var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, objectId);
-                return _collection.Find(filter).SingleOrDefaultAsync();
-            });
-        }
-
         public virtual async Task InsertManyAsync(ICollection<TDocument> documents)
         {
             await _collection.InsertManyAsync(documents);
+        }
+
+        public virtual async Task UpdateOrInsertManyAsync(ICollection<TDocument> documents,
+            FilterDefinition<TDocument> filter, UpdateDefinition<TDocument> update)
+        {
+            //await _collection.UpdateManyAsync(filter, update, new UpdateOptions { IsUpsert = true });
+        }
+
+        public virtual async Task DeleteManyAsync(FilterDefinition<TDocument> filter)
+        {
+            await _collection.DeleteManyAsync(filter);
         }
     }
 }
