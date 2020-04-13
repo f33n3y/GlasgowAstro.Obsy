@@ -1,6 +1,7 @@
 ﻿using GlasgowAstro.Obsy.Data.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
+using MongoDB.Bson;
 
 namespace GlasgowAstro.Obsy.Data.Models
 {
@@ -39,18 +40,21 @@ namespace GlasgowAstro.Obsy.Data.Models
         /// Absolute magnitude
         /// </summary>
         [BsonElement("H")]
-        public float AbsoluteMagnitude { get; set; }
+        [BsonRepresentation(BsonType.Double)]
+        public double AbsoluteMagnitude { get; set; }
 
         /// <summary>
         /// Mean daily motion, n (degrees/day)
         /// </summary>
         [BsonElement("n")]
-        public float MeanDailyMotion { get; set; }
+        [BsonRepresentation(BsonType.Double)]
+        public double MeanDailyMotion { get; set; }
 
         /// <summary>
         /// Orbital period (years)
         /// </summary>
         [BsonElement("Orbital_period")]
-        public float OrbitalPeriod { get; set; }
+        [BsonRepresentation(BsonType.Double)]
+        public double OrbitalPeriod { get; set; }
     }
 }

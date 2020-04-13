@@ -34,61 +34,61 @@ namespace GlasgowAstro.Obsy.DataGrabber.Models
         /// Absolute magnitude
         /// </summary>
         [JsonPropertyName("H")]
-        public float AbsoluteMagnitude { get; set; }
+        public double AbsoluteMagnitude { get; set; }
 
         /// <summary>
         /// Slope parameter
         /// </summary>
         [JsonPropertyName("G")]
-        public float SlopeParameter { get; set; }
+        public double SlopeParameter { get; set; }
 
         /// <summary>
         /// Epoch of the orbit (Julian Date)
         /// </summary>
         [JsonPropertyName("Epoch")]
-        public float Epoch { get; set; }
+        public double Epoch { get; set; }
 
         /// <summary>
         /// Semimajor axis, a (AU)
         /// </summary>
         [JsonPropertyName("a")]
-        public float SemiMajorAxis { get; set; }
+        public double SemiMajorAxis { get; set; }
 
         /// <summary>
         /// Orbital eccentricity, e
         /// </summary>
         [JsonPropertyName("e")]
-        public float OrbitalEccentricity { get; set; }
+        public double OrbitalEccentricity { get; set; }
 
         /// <summary>
         /// Inclination to the ecliptic, J2000.0 (degrees)
         /// </summary>
         [JsonPropertyName("i")]
-        public float InclinationEcliptic { get; set; }
+        public double InclinationEcliptic { get; set; }
 
         /// <summary>
         /// Longitude of the ascending node, ☊, J2000.0 (degrees)
         /// </summary>
         [JsonPropertyName("Node")]
-        public float Node { get; set; }
+        public double Node { get; set; }
 
         /// <summary>
         /// Argument of perihelion, ω, J2000.0 (degrees)
         /// </summary>
         [JsonPropertyName("Peri")]
-        public float Peri { get; set; }
+        public double Peri { get; set; }
 
         /// <summary>
         /// Mean anomaly, M, at the epoch (degrees)
         /// </summary>
         [JsonPropertyName("M")]
-        public float MeanAnomoly { get; set; }
+        public double MeanAnomoly { get; set; }
 
         /// <summary>
         /// Mean daily motion, n (degrees/day)
         /// </summary>
         [JsonPropertyName("n")]
-        public float MeanDailyMotion { get; set; }
+        public double MeanDailyMotion { get; set; }
 
         /// <summary>
         /// Uncertainty parameter with values 0-9
@@ -131,7 +131,7 @@ namespace GlasgowAstro.Obsy.DataGrabber.Models
         /// r.m.s. residual (")
         /// </summary>
         [JsonPropertyName("rms")]
-        public float Rms { get; set; }
+        public double Rms { get; set; }
 
         /// <summary>
         /// Coarse indicator of perturbers used in 
@@ -208,30 +208,30 @@ namespace GlasgowAstro.Obsy.DataGrabber.Models
         /// Perihelion distance (AU)
         /// </summary>
         [JsonPropertyName("Perihelion_dist")]
-        public float PerihelionDistance { get; set; }
+        public double PerihelionDistance { get; set; }
 
         /// <summary>
         /// Aphelion distance (AU)
         /// </summary>
         [JsonPropertyName("Aphelion_dist")]
-        public float AphelionDistance { get; set; }
+        public double AphelionDistance { get; set; }
 
         /// <summary>
         /// Semilatus rectum distance (AU)
         /// </summary>
         [JsonPropertyName("Semilatus_rectum")]
-        public float SemilatusRectumDistance { get; set; }
+        public double SemilatusRectumDistance { get; set; }
 
         /// <summary>
         /// Orbital period (years)
         /// </summary>
         [JsonPropertyName("Orbital_period")]
-        public float OrbitalPeriod { get; set; }
+        public double OrbitalPeriod { get; set; }
 
         /// <summary>
         /// Synodic period (years)
         /// </summary>
         [JsonPropertyName("Synodic_period")]
-        public float SynodicPeriod { get; set; }    
+        public double SynodicPeriod { get; set; }    
     }
 }

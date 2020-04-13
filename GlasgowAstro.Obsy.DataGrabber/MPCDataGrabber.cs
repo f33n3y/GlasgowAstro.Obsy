@@ -38,7 +38,7 @@ namespace GlasgowAstro.Obsy.DataGrabber
 
             if (!string.IsNullOrWhiteSpace(filePath))
             {
-                // Read file, deserialize, map and store. TODO Move to class.
+                // Read file, deserialize, map and store. TODO Exception handling. Move to class.
                 IEnumerable<Models.Asteroid> asteroids;
                 using (FileStream fileStream = File.OpenRead(filePath))
                 {
@@ -46,10 +46,9 @@ namespace GlasgowAstro.Obsy.DataGrabber
                     log.LogInformation("File deserialized");
                 }
 
-                // TODO Fix float accuracy issue, TODO exception handling
                 ICollection<Asteroid> documents = _mapper.Map<IEnumerable<Models.Asteroid>, IEnumerable<Asteroid>>(asteroids).ToList();
-
                 var documentsToUpsert = new List<WriteModel<Asteroid>>();
+
                 foreach (var doc in documents)
                 {
                     var filter = Builders<Asteroid>.Filter.Eq(x => x.CompoId, doc.CompoId);
@@ -60,12 +59,6 @@ namespace GlasgowAstro.Obsy.DataGrabber
                 }
                 await _asteroidRepository.BulkWriteAsync(documentsToUpsert);
                 log.LogInformation("Bulk write completed");
-
-                // NOTE: Clear collection and rebuild it until bulk upsert works properly
-                //await _asteroidRepository.DeleteManyAsync(Builders<Asteroid>.Filter.Empty);
-                //log.LogInformation("Collection cleared");
-                //await _asteroidRepository.InsertManyAsync(documents);
-                //log.LogInformation("Collection rebuilt");
             }
         }
     }
