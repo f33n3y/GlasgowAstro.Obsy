@@ -9,7 +9,7 @@ Pre-alpha
 - https://glasgowastro.co.uk
 
 ## Projects
-- GlasgowAstro.Obsy.DataGrabber - AzureFunction with TimerTrigger to download and decompress MPCs data and store it.
+- GlasgowAstro.Obsy.DataGrabber - AzureFunction with TimerTrigger to download MPCs data and store it.
 - GlasgowAstro.Obsy.Data - Generic repository to perform CRUD operations against MongoDb.
 - GlasgowAstro.Obsy.Api - WebApi with endpoints to query stored MPC data.
 - GlasgowAstro.Obsy.Bot - Discord bot
