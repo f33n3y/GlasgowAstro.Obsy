@@ -1,10 +1,12 @@
-﻿using Discord.Commands;
+﻿using Discord;
+using Discord.Commands;
 using Discord.WebSocket;
 using GlasgowAstro.Obsy.Bot.Models;
 using System;
+using System.Reflection;
 using System.Threading.Tasks;
 
-namespace GlasgowAstro.Obsy.Bot
+namespace GlasgowAstro.Obsy.Bot.Services
 {
     public class BotStartupService
     {
@@ -24,8 +26,9 @@ namespace GlasgowAstro.Obsy.Bot
 
         public async Task LaunchBotAsync()
         {
-            var test = _config.DiscordToken;
-            var test2 = "";
+            await _discord.LoginAsync(TokenType.Bot, _config.DiscordToken);
+            await _discord.StartAsync();
+            await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _provider); // Load commands and modules into command service
         }
     }
 }
