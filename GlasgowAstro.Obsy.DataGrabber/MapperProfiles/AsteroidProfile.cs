@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GlasgowAstro.Obsy.DataGrabber.Models;
 
 namespace GlasgowAstro.Obsy.DataGrabber.MapperProfiles
 {
@@ -6,7 +7,7 @@ namespace GlasgowAstro.Obsy.DataGrabber.MapperProfiles
     {
         public AsteroidProfile()
         {
-            CreateMap<Models.Asteroid, Data.Models.Asteroid>();
+            CreateMap<AsteroidReadModel, Data.Models.Asteroid>();
         }
     }
 }

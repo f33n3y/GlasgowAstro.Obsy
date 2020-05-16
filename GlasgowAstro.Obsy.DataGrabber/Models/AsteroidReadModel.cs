@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace GlasgowAstro.Obsy.DataGrabber.Models
 {
-    public class Asteroid
+    public class AsteroidReadModel
     {
         /// <summary>
         /// Name, if asteroid has received one
