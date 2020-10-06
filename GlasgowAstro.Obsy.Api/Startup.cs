@@ -1,16 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using GlasgowAstro.Obsy.Api.Authentication;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Microsoft.Extensions.Logging;
 
 namespace GlasgowAstro.Obsy.Api
 {
@@ -28,6 +23,16 @@ namespace GlasgowAstro.Obsy.Api
         {
             services.AddControllers();
 
+            // configure basic authentication 
+            services.AddAuthentication("BasicAuthentication")
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
+            services.AddHsts(options =>
+            {
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GlasgowAstro.Obsy API", Version = "v1" });
@@ -37,6 +42,16 @@ namespace GlasgowAstro.Obsy.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                //builder.AddUserSecrets<Startup>();
+            } 
+            else
+            {
+                app.UseHsts();              
+            }
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
@@ -48,22 +63,14 @@ namespace GlasgowAstro.Obsy.Api
                 c.RoutePrefix = string.Empty;
             });
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                //builder.AddUserSecrets<Startup>();
-            }
-
+            app.UseRouting();
+            
             app.UseHttpsRedirection();
 
-            app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }
 }

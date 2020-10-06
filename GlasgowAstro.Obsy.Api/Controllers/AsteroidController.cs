@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GlasgowAstro.Obsy.Api.Controllers
 {
+        
     [ApiController]
     [Produces("application/json")]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
+    [Authorize]
     public class AsteroidController : ControllerBase
     {
         public AsteroidController()
@@ -16,12 +15,18 @@ namespace GlasgowAstro.Obsy.Api.Controllers
 
         }
 
-        [HttpGet]
+        [HttpGet("test")]        
         public string Test()
         {
-            return "Hello friend";
+            return "test";
         }
 
+        [HttpGet("hello")]        
+        [AllowAnonymous]
+        public string HelloFriend()
+        {
+            return "hello friend";
+        }
 
     }
 }
