@@ -14,7 +14,6 @@ namespace GlasgowAstro.Obsy.Api.Authentication
 {
     public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
-
         public BasicAuthenticationHandler(
             IOptionsMonitor<AuthenticationSchemeOptions> options,
             ILoggerFactory logger,
@@ -65,6 +64,12 @@ namespace GlasgowAstro.Obsy.Api.Authentication
             var ticket = new AuthenticationTicket(principal, Scheme.Name);
 
             return AuthenticateResult.Success(ticket);
+        }
+
+        protected override async Task HandleChallengeAsync(AuthenticationProperties properties)
+        {
+            Response.Headers["WWW-Authenticate"] = $"Basic realm=\"Access to the Obsy API\", charset=\"UTF-8\"";
+            await base.HandleChallengeAsync(properties);
         }
 
         private async Task<bool> Test(string userName, string password)
