@@ -1,4 +1,6 @@
 using GlasgowAstro.Obsy.Api.Authentication;
+using GlasgowAstro.Obsy.Services;
+using GlasgowAstro.Obsy.Services.Abstractions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,6 +39,8 @@ namespace GlasgowAstro.Obsy.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GlasgowAstro.Obsy API", Version = "v1" });
             });
+
+            services.AddSingleton<IAsteroidService, AsteroidService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
