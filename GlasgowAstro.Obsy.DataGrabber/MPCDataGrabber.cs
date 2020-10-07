@@ -15,14 +15,14 @@ using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.DataGrabber
 {
-    public class MPCDataGrabber
+    public class MpcDataGrabber
     {
         private readonly IConfiguration _config;
         private readonly IMongoRepository<Asteroid> _asteroidRepository;
         private readonly IMapper _mapper;
         private readonly IFileDownloader _downloader;
 
-        public MPCDataGrabber(IConfiguration config, IMongoRepository<Data.Models.Asteroid> asteroidRepository,
+        public MpcDataGrabber(IConfiguration config, IMongoRepository<Data.Models.Asteroid> asteroidRepository,
             IMapper mapper, IFileDownloader downloader)
         {
             _config = config;
@@ -31,7 +31,7 @@ namespace GlasgowAstro.Obsy.DataGrabber
             _downloader = downloader;
         }
 
-        [FunctionName("MPCDataGrabber")]
+        [FunctionName("MpcDataGrabber")]
         public async Task Run([TimerTrigger("0 0 0 * * *", RunOnStartup = true)]TimerInfo myTimer, ILogger log)
         {
             var filePath = await _downloader.DownloadAsync();
