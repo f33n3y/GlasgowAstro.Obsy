@@ -1,5 +1,5 @@
 # GlasgowAstro.Obsy
-.NET Core solution to get the Minor Planet Center's asteroid orbit data and make it available via Discord Bot & API. A work in progress!
+.NET Core solution which gets the Minor Planet Center's asteroid orbit data and makes it available via a Discord Bot & API. A work in progress!
 
 ## Status
 Pre-alpha
