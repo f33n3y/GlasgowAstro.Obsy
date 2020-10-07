@@ -44,5 +44,11 @@ namespace GlasgowAstro.Obsy.Data
         {
             await _collection.DeleteManyAsync(filter);
         }
+
+        public virtual async Task<List<TDocument>> FindDocumentAsync(FilterDefinition<TDocument> filter)
+        {
+            var documents = await _collection.FindAsync(filter);
+            return await documents.ToListAsync();
+        }
     }
 }

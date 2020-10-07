@@ -12,5 +12,7 @@ namespace GlasgowAstro.Obsy.Data.Abstractions
         Task BulkWriteAsync(IEnumerable<WriteModel<TDocument>> documents);
 
         Task DeleteManyAsync(FilterDefinition<TDocument> filter);
+
+        Task<List<TDocument>> FindDocumentAsync(FilterDefinition<TDocument> filter);
     }
 }
