@@ -14,5 +14,3 @@ Pre-alpha
 - GlasgowAstro.Obsy.Service - Contains asteroid service which calls repository to retrieve MPC data.
 - GlasgowAstro.Obsy.Api - API with endpoints calling the asteroid service.
 - GlasgowAstro.Obsy.Bot - A Discord bot with commands to retrieve MPC data via the Obsy API
-
-Bot -> API -> Service -> Data
