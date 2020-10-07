@@ -11,4 +11,7 @@
   <ItemGroup>
     <Folder Include="Models\Request\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GlasgowAstro.Obsy.Services\GlasgowAstro.Obsy.Services.csproj" />
+  </ItemGroup>
 </Project>
