@@ -1,5 +1,5 @@
 # GlasgowAstro.Obsy
-.NET solution to get the Minor Planet Center's asteroid orbit data and make it available via an API. A work in progress!
+.NET Core solution which gets the Minor Planet Center's asteroid orbit data and makes it available via a Discord Bot & API. A work in progress!
 
 ## Status
 Pre-alpha
@@ -9,7 +9,8 @@ Pre-alpha
 - https://glasgowastro.co.uk
 
 ## Projects
-- GlasgowAstro.Obsy.DataGrabber - AzureFunction with TimerTrigger to download MPCs data and store it.
-- GlasgowAstro.Obsy.Data - Generic repository to perform CRUD operations against MongoDb.
-- GlasgowAstro.Obsy.Api - WebApi with endpoints to query stored MPC data.
-- GlasgowAstro.Obsy.Bot - Discord bot
+- GlasgowAstro.Obsy.DataGrabber - Azure Function with TimerTrigger to download MPC's data and store it.
+- GlasgowAstro.Obsy.Data - DAL with generic repository to perform CRUD operations against MongoDb.
+- GlasgowAstro.Obsy.Service - Contains asteroid service which calls repository to retrieve MPC data.
+- GlasgowAstro.Obsy.Api - API with endpoints calling the asteroid service.
+- GlasgowAstro.Obsy.Bot - A Discord bot with commands to retrieve MPC data via the Obsy API
