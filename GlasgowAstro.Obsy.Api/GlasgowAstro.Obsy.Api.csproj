@@ -10,6 +10,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Request\" />
+    <Folder Include="Models\Response\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GlasgowAstro.Obsy.Services\GlasgowAstro.Obsy.Services.csproj" />

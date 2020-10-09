@@ -1,6 +1,10 @@
+using AutoMapper;
 using GlasgowAstro.Obsy.Api.Authentication;
+using GlasgowAstro.Obsy.Data;
+using GlasgowAstro.Obsy.Data.Abstractions;
 using GlasgowAstro.Obsy.Services;
 using GlasgowAstro.Obsy.Services.Abstractions;
+using GlasgowAstro.Obsy.Services.MapperProfiles;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,21 +29,23 @@ namespace GlasgowAstro.Obsy.Api
         {
             services.AddControllers();
 
-            // configure basic authentication 
+            // Basic auth
             services.AddAuthentication("BasicAuthentication")
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
-
+            
             services.AddHsts(options =>
             {
                 options.Preload = true;
                 options.IncludeSubDomains = true;
             });
-
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GlasgowAstro.Obsy API", Version = "v1" });
             });
-
+            
+            services.AddAutoMapper(profileAssemblyMarkerTypes: typeof(AsteroidProfile));
+            services.AddSingleton(typeof(IMongoRepository<>), typeof(MongoRepository<>));
             services.AddSingleton<IAsteroidService, AsteroidService>();
         }
 

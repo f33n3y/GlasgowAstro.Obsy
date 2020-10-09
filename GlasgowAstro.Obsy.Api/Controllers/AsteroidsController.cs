@@ -1,8 +1,9 @@
-﻿using GlasgowAstro.Obsy.Api.Models.Response;
-using GlasgowAstro.Obsy.Services.Abstractions;
+﻿using GlasgowAstro.Obsy.Services.Abstractions;
+using GlasgowAstro.Obsy.Services.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.Api.Controllers
@@ -21,27 +22,37 @@ namespace GlasgowAstro.Obsy.Api.Controllers
             _asteroidService = asteroidService;
         }
 
-        [HttpGet("hello")]        
+        // GET api/asteroids/hello
+        [HttpGet("hello")]
         public string HelloFriend()
         {
-            return "hello friend";
+            return "Hello friend";
         }
 
         // GET api/asteroids/{name}
         [HttpGet("{name}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<AsteroidResponse>> FindAsteroidAsync(string asteroidName) // TODO arg validation
+        public async Task<ActionResult<AsteroidResponse>> FindAsteroidAsync(string name) // TODO validation
         {
-            //var asteroid = await _asteroidService.FindAsteroidByNameAsync(asteroidName)...
-            //if (asteroid == null)
-            //{
-            //    return NotFound();
-            //}
+            try
+            {
+                var asteroid = await _asteroidService.FindAsteroidByNameAsync(name);
 
-            return Ok();
-            //return Ok(asteroid);
+                if (asteroid == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(asteroid);                
+            }
+            catch (Exception e)
+            {
+                // TODO logging...
+                return NotFound();
+            }
         }
+
 
     }
 }
