@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.Services
 {
-    public class AsteroidService : IAsteroidService
+    public class AsteroidDataService : IAsteroidDataService
     {
         private readonly IMongoRepository<Asteroid> _asteroidRepository;
         private readonly IMapper _mapper;
 
-        public AsteroidService(IMongoRepository<Asteroid> asteroidRepository, IMapper mapper)
+        public AsteroidDataService(IMongoRepository<Asteroid> asteroidRepository, IMapper mapper)
         {
             _asteroidRepository = asteroidRepository;
             _mapper = mapper;
         }
 
-        public async Task<AsteroidResponse> FindAsteroidByNameAsync(string name)
+        public async Task<AsteroidDataResponse> FindAsteroidByNameAsync(string name)
         {            
             var filter = Builders<Asteroid>.Filter.Eq(x => x.Name, name);
             var asteroidRepoResult = await _asteroidRepository.FindDocumentAsync(filter);
@@ -28,7 +28,7 @@ namespace GlasgowAstro.Obsy.Services
             if (asteroidRepoResult == null || asteroidRepoResult?.Count < 1)
                 return null; // ??
             
-            var asteroidResponse = _mapper.Map<AsteroidResponse>(asteroidRepoResult.First()); //TODO Move .First() elsewhere
+            var asteroidResponse = _mapper.Map<AsteroidDataResponse>(asteroidRepoResult.First()); //TODO Move .First() elsewhere
             return asteroidResponse;
         }
     }
