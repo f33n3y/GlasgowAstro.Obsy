@@ -8,7 +8,7 @@ namespace GlasgowAstro.Obsy.Services.MapperProfiles
     {
         public AsteroidProfile()
         {
-            CreateMap<Asteroid, AsteroidResponse>();
+            CreateMap<Asteroid, AsteroidDataResponse>();
         }
     }
 }

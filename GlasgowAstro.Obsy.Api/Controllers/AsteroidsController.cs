@@ -15,11 +15,13 @@ namespace GlasgowAstro.Obsy.Api.Controllers
     [Authorize]
     public class AsteroidsController : ControllerBase
     {
-        private readonly IAsteroidService _asteroidService;
+        private readonly IAsteroidDataService _asteroidService;
+        private readonly IAsteroidObservationService _observationService;
 
-        public AsteroidsController(IAsteroidService asteroidService)
+        public AsteroidsController(IAsteroidDataService asteroidService, IAsteroidObservationService observationService)
         {
             _asteroidService = asteroidService;
+            _observationService = observationService;
         }
 
         // GET api/asteroids/hello
@@ -33,7 +35,7 @@ namespace GlasgowAstro.Obsy.Api.Controllers
         [HttpGet("{name}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<AsteroidResponse>> FindAsteroidAsync(string name) // TODO validation
+        public async Task<ActionResult<AsteroidDataResponse>> FindAsteroidAsync(string name) // TODO validation
         {
             try
             {
@@ -49,6 +51,31 @@ namespace GlasgowAstro.Obsy.Api.Controllers
             catch (Exception e)
             {
                 // TODO logging...
+                return NotFound();
+            }
+        }
+
+        // GET api/asteroids/{id}/observations
+        [HttpGet("{id}/observations")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<AsteroidObservationResponse>> FindObservationsAsync(string id) // TODO validation
+        {
+            try
+            {
+                var observation = await _observationService.GetObservationsAsync(id);
+
+                if (observation == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(observation);
+
+            }
+            catch (Exception e)
+            {
+                // TODO logging ...
                 return NotFound();
             }
         }
