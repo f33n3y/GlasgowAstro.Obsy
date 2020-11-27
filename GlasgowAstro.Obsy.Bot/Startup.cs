@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
 using System.IO;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.Bot
@@ -47,6 +46,7 @@ namespace GlasgowAstro.Obsy.Bot
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.Configure<BotSettings>(config.GetSection("BotSettings"));
+            // TODO Obsy api client
             serviceCollection.AddSingleton(resolver => resolver.GetRequiredService<IOptions<BotSettings>>().Value);    
             serviceCollection.AddSingleton(new DiscordSocketClient());
             serviceCollection.AddSingleton(new CommandService(new CommandServiceConfig
