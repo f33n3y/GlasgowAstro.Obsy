@@ -9,8 +9,8 @@ Pre-alpha
 - https://glasgowastro.co.uk
 
 ## Projects
-- GlasgowAstro.Obsy.DataGrabber - Azure Function with TimerTrigger to download MPC's data and store it.
+- GlasgowAstro.Obsy.DataGrabber - Azure Function with TimerTrigger to download MPC's asteroid orbits and parameters and store it.
 - GlasgowAstro.Obsy.Data - DAL with generic repository to perform CRUD operations against MongoDb.
-- GlasgowAstro.Obsy.Service - Contains asteroid service which calls repository to retrieve MPC data.
-- GlasgowAstro.Obsy.Api - API with endpoints calling the asteroid service.
+- GlasgowAstro.Obsy.Service - Contains services to retrieve MPC data.
+- GlasgowAstro.Obsy.Api - API with endpoints calling the asteroid services.
 - GlasgowAstro.Obsy.Bot - A Discord bot with commands to retrieve MPC data via the Obsy API
