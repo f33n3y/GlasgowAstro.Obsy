@@ -46,7 +46,8 @@ namespace GlasgowAstro.Obsy.Api
             
             services.AddAutoMapper(profileAssemblyMarkerTypes: typeof(AsteroidProfile));
             services.AddSingleton(typeof(IMongoRepository<>), typeof(MongoRepository<>));
-            services.AddSingleton<IAsteroidService, AsteroidService>();
+            services.AddSingleton<IAsteroidDataService, AsteroidDataService>();
+            services.AddSingleton<IAsteroidObservationService, AsteroidObservationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.Services.Abstractions
 {
-    public interface IAsteroidService
+    public interface IAsteroidDataService
     {
-        Task<AsteroidResponse> FindAsteroidByNameAsync(string name);
+        Task<AsteroidDataResponse> FindAsteroidByNameAsync(string name);
     }
 }

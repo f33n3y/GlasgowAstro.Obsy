@@ -7,7 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
 using System.IO;
-using System.Reflection;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.Bot
@@ -46,6 +48,15 @@ namespace GlasgowAstro.Obsy.Bot
             var config = configBuilder.Build();
 
             var serviceCollection = new ServiceCollection();
+
+            var httpClient = new HttpClient();
+            var username = config.GetValue<string>("ObsyApiUsername");
+            var pw = config.GetValue<string>("ObsyApiPassword");
+            var authToken = Encoding.ASCII.GetBytes($"{username}:{pw}");
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
+                    Convert.ToBase64String(authToken));
+            serviceCollection.AddSingleton(new ObsyApiClient(config.GetValue<string>("ObsyApiBaseUrl"), httpClient));
+
             serviceCollection.Configure<BotSettings>(config.GetSection("BotSettings"));
             serviceCollection.AddSingleton(resolver => resolver.GetRequiredService<IOptions<BotSettings>>().Value);    
             serviceCollection.AddSingleton(new DiscordSocketClient());
