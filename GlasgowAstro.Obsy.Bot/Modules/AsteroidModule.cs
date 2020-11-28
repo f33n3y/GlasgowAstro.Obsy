@@ -1,15 +1,17 @@
 ﻿using Discord.Commands;
+using GlasgowAstro.Obsy.Bot.Services;
+using System;
 using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.Bot.Modules
 {
     public class AsteroidModule : ModuleBase<SocketCommandContext>
     {
-        // api client ...
+        private readonly ObsyApiClient _obsyApiClient;
 
-        public AsteroidModule()
+        public AsteroidModule(ObsyApiClient obsyApiClient)
         {
-
+            _obsyApiClient = obsyApiClient;
         }
 
         [Command("obsy")]
@@ -17,7 +19,15 @@ namespace GlasgowAstro.Obsy.Bot.Modules
         public async Task GetObservationsAsync([Summary("The asteroid's number")] string asteroidNum)
         {
             // TESTING
-            await ReplyAsync("bla");
-        } 
+            try
+            {
+                await ReplyAsync(await _obsyApiClient.ObservationsAsync(asteroidNum));
+            }
+            catch (Exception e)
+            {
+                var bla = ""; // TODO
+            }
+
+        }
     }
 }

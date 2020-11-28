@@ -26,7 +26,7 @@ namespace GlasgowAstro.Obsy.Services
             // https://minorplanetcenter.net/web_service/
             var userName = "mpc_ws";
             var passwd = "mpc!!ws";
-            var url = "https://minorplanetcenter.net/search_db?number=433&object_type=M&table=observations&limit=1";
+            var url = $"https://minorplanetcenter.net/search_db?number={id}&object_type=M&table=observations&limit=3";
 
             var testClient = new HttpClient(); // TODO Inject me!
             var authToken = Encoding.ASCII.GetBytes($"{userName}:{passwd}");
