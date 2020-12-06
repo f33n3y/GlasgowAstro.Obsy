@@ -1,4 +1,7 @@
 ﻿using GlasgowAstro.Obsy.Services.Abstractions;
+using GlasgowAstro.Obsy.Services.Models;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -13,23 +16,31 @@ namespace GlasgowAstro.Obsy.Services
             _clientFactory = clientFactory;
         }
 
-        // TODO Validation. Return AsteroidObservationResponse.
-        public async Task<string> GetObservationsAsync(string asteroidNum) 
+        // TODO Request validation + automap. Return AsteroidObservationResponse.
+        public async Task<AsteroidObservationResponse> GetObservationsAsync(string asteroidNum)
         {
-            var url = $"/search_db?number={asteroidNum}&object_type=M&table=observations&limit=3";
+            var queryArguments = new Dictionary<string, string>()
+            {
+                { "number", asteroidNum },
+                { "object_type", "M" },
+                { "table", "observations" },
+                { "limit", "3" },
+                { "order_by_desc", "observation_date" },
+            };
 
-            //order_by_desc
+            var requestUri = QueryHelpers.AddQueryString("/search_db", queryArguments);
 
             var client = _clientFactory.CreateClient("MpcClient");
-            var result = await client.GetAsync(url);
+            var result = await client.GetAsync(requestUri);
 
-            //if (result.IsSuccessStatusCode)
-            //{
-            //    return await result.Content.ReadAsStringAsync();
-            //}
-            var test = "";
+            var observationResponse = new AsteroidObservationResponse();
 
-            return await result.Content.ReadAsStringAsync();  // TODO 
+            if (result.IsSuccessStatusCode)
+            {                
+                observationResponse.RawTest = await result.Content.ReadAsStringAsync();
+            }
+
+            return observationResponse;
         }
 
     }

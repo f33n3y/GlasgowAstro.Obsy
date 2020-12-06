@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using GlasgowAstro.Obsy.Services.Models;
+using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.Services.Abstractions
 {
     public interface IAsteroidObservationService
     {
-        Task<string> GetObservationsAsync(string id);
+        Task<AsteroidObservationResponse> GetObservationsAsync(string id);
     }
 }
