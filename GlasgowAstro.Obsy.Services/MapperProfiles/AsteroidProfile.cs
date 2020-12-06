@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using GlasgowAstro.Obsy.Data.Models;
-using GlasgowAstro.Obsy.Services.Models;
+using GlasgowAstro.Obsy.Services.Models.Response;
 
 namespace GlasgowAstro.Obsy.Services.MapperProfiles
 {

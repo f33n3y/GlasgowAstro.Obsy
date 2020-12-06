@@ -2,7 +2,7 @@
 using GlasgowAstro.Obsy.Data.Abstractions;
 using GlasgowAstro.Obsy.Data.Models;
 using GlasgowAstro.Obsy.Services.Abstractions;
-using GlasgowAstro.Obsy.Services.Models;
+using GlasgowAstro.Obsy.Services.Models.Response;
 using MongoDB.Driver;
 using System.Linq;
 using System.Threading.Tasks;

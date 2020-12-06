@@ -5,13 +5,10 @@
     <UserSecretsId>a973a2bb-0f6d-434c-9220-5aa1e346f36e</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Request\" />
-    <Folder Include="Models\Response\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GlasgowAstro.Obsy.Services\GlasgowAstro.Obsy.Services.csproj" />

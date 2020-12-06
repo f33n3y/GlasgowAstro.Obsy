@@ -1,4 +1,4 @@
-﻿namespace GlasgowAstro.Obsy.Services.Models
+﻿namespace GlasgowAstro.Obsy.Services.Models.Response
 {
     public class AsteroidDataResponse
     {

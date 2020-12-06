@@ -1,5 +1,6 @@
 ﻿using GlasgowAstro.Obsy.Services.Abstractions;
-using GlasgowAstro.Obsy.Services.Models;
+using GlasgowAstro.Obsy.Services.Models.Request;
+using GlasgowAstro.Obsy.Services.Models.Response;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -17,11 +18,14 @@ namespace GlasgowAstro.Obsy.Services
         }
 
         // TODO Request validation + automap. Return AsteroidObservationResponse.
-        public async Task<AsteroidObservationResponse> GetObservationsAsync(string asteroidNum)
+        public async Task<AsteroidObservationResponse> GetObservationsAsync(ObservationServiceRequest asteroidObservationRequest)
         {
+
+            // TODO Map request object to MpcClient request...
+
             var queryArguments = new Dictionary<string, string>()
             {
-                { "number", asteroidNum },
+                { "number", asteroidObservationRequest.Number },
                 { "object_type", "M" },
                 { "table", "observations" },
                 { "limit", "3" },
@@ -36,7 +40,7 @@ namespace GlasgowAstro.Obsy.Services
             var observationResponse = new AsteroidObservationResponse();
 
             if (result.IsSuccessStatusCode)
-            {                
+            {
                 observationResponse.RawTest = await result.Content.ReadAsStringAsync();
             }
 

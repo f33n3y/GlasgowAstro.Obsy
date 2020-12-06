@@ -1,7 +1,4 @@
-﻿using GlasgowAstro.Obsy.Services.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using GlasgowAstro.Obsy.Services.Models.Response;
 using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.Services.Abstractions
