@@ -35,7 +35,7 @@ namespace GlasgowAstro.Obsy.Api.Controllers
         [HttpGet("{name}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<AsteroidDataResponse>> FindAsteroidAsync(string name) // TODO validation
+        public async Task<ActionResult<AsteroidDataResponse>> FindAsteroidAsync(string name) // TODO validation + request model
         {
             try
             {
@@ -59,7 +59,8 @@ namespace GlasgowAstro.Obsy.Api.Controllers
         [HttpGet("{id}/observations")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<string>> FindObservationsAsync(string id) // TODO validation
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<string>> FindObservationsAsync(string id) // TODO validation + request model
         {
             try
             {         
@@ -71,7 +72,7 @@ namespace GlasgowAstro.Obsy.Api.Controllers
                     return NotFound();
                 }
 
-                return Ok(observation);
+                return Ok(observation.RawTest);
 
             }
             catch (Exception e)
