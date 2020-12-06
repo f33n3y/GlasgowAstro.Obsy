@@ -12,6 +12,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
+using System.Configuration;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace GlasgowAstro.Obsy.Api
 {
@@ -29,19 +33,30 @@ namespace GlasgowAstro.Obsy.Api
         {
             services.AddControllers();
 
-            // Basic auth
             services.AddAuthentication("BasicAuthentication")
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
-            
+
             services.AddHsts(options =>
             {
                 options.Preload = true;
                 options.IncludeSubDomains = true;
             });
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GlasgowAstro.Obsy API", Version = "v1" });
+            });
+
+            // Note: These auth creds for the MPC web service are already publicly available:           
+            // https://minorplanetcenter.net/web_service/
+            var authToken = Encoding.ASCII.GetBytes(
+                $"{Configuration.GetValue<string>("MpcUsername")}:{Configuration.GetValue<string>("MpcPassword")}");
+            
+            services.AddHttpClient("MpcClient", c =>
+            {
+                c.BaseAddress = new Uri(Configuration.GetValue<string>("MpcBaseUrl"));
+                c.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
+                    Convert.ToBase64String(authToken));
             });
             
             services.AddAutoMapper(profileAssemblyMarkerTypes: typeof(AsteroidProfile));
@@ -63,11 +78,7 @@ namespace GlasgowAstro.Obsy.Api
                 app.UseHsts();              
             }
 
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-            // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "GlasgowAstro.Obsy API v1");
