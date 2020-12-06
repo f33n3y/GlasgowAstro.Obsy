@@ -1,4 +1,5 @@
-﻿using Discord.Commands;
+﻿using Discord;
+using Discord.Commands;
 using GlasgowAstro.Obsy.Bot.Services;
 using System;
 using System.Threading.Tasks;
@@ -21,7 +22,19 @@ namespace GlasgowAstro.Obsy.Bot.Modules
             // TESTING
             try
             {
-                await ReplyAsync(await _obsyApiClient.ObservationsAsync(asteroidNum));
+                var result = await _obsyApiClient.ObservationsAsync(asteroidNum);
+
+                //var fields = new EmbedFieldBuilder(); // TODO                    
+
+                var embed = new EmbedBuilder() //TODO Move embed building elsewhere
+                    .WithTitle($"Recent observations for {asteroidNum}")
+                    .WithFooter(footer => footer.Text = "Obsy, a GlasgowAstro bot")
+                    .WithCurrentTimestamp()
+                    .WithColor(Color.Green)                    
+                    .AddField("Observations", result)                    
+                    .Build();
+
+                await ReplyAsync(embed: embed);
             }
             catch (Exception e)
             {
