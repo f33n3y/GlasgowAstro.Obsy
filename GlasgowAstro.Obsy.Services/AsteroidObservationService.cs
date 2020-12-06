@@ -1,39 +1,35 @@
 ﻿using GlasgowAstro.Obsy.Services.Abstractions;
-using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.Services
 {
     public class AsteroidObservationService : IAsteroidObservationService
     {
-        // inject HTTP client to call MPC search service
+        private readonly IHttpClientFactory _clientFactory;
 
-        public AsteroidObservationService()
+        public AsteroidObservationService(IHttpClientFactory clientFactory)
         {
-            // HTTP client
+            _clientFactory = clientFactory;
         }
 
-        /// <summary>
-        /// TESTING TESTING TESTING
-        /// </summary>
-        /// <returns></returns>
-        public async Task<string> GetObservationsAsync(string id)
+        // TODO Validation. Return AsteroidObservationResponse.
+        public async Task<string> GetObservationsAsync(string asteroidNum) 
         {
-            // Note: These auth creds for the MPC web service are already publicly available:           
-            // https://minorplanetcenter.net/web_service/
-            var userName = "mpc_ws";
-            var passwd = "mpc!!ws";
-            var url = $"https://minorplanetcenter.net/search_db?number={id}&object_type=M&table=observations&limit=3";
+            var url = $"/search_db?number={asteroidNum}&object_type=M&table=observations&limit=3";
 
-            var testClient = new HttpClient(); // TODO Inject me!
-            var authToken = Encoding.ASCII.GetBytes($"{userName}:{passwd}");
-            testClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
-                    Convert.ToBase64String(authToken));         
-            var result = await testClient.GetAsync(url);
-            return await result.Content.ReadAsStringAsync();
+            //order_by_desc
+
+            var client = _clientFactory.CreateClient("MpcClient");
+            var result = await client.GetAsync(url);
+
+            //if (result.IsSuccessStatusCode)
+            //{
+            //    return await result.Content.ReadAsStringAsync();
+            //}
+            var test = "";
+
+            return await result.Content.ReadAsStringAsync();  // TODO 
         }
 
     }
