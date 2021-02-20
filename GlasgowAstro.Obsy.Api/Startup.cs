@@ -52,7 +52,7 @@ namespace GlasgowAstro.Obsy.Api
             var authToken = Encoding.ASCII.GetBytes(
                 $"{Configuration.GetValue<string>("MpcUsername")}:{Configuration.GetValue<string>("MpcPassword")}");
             
-            services.AddHttpClient<IAsteroidObservationService, AsteroidObservationService>(c =>
+            services.AddHttpClient("MpcClient", c =>
             {
                 c.BaseAddress = new Uri(Configuration.GetValue<string>("MpcBaseUrl"));
                 c.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",

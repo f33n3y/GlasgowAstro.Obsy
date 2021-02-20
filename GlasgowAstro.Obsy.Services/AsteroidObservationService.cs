@@ -12,18 +12,18 @@ namespace GlasgowAstro.Obsy.Services
 {
     public class AsteroidObservationService : IAsteroidObservationService
     {
-        private readonly HttpClient _httpClient;
+        private readonly IHttpClientFactory _clientFactory;
 
-        public AsteroidObservationService(HttpClient httpClient)
+        public AsteroidObservationService(IHttpClientFactory clientFactory)
         {
-            _httpClient = httpClient;
+            _clientFactory = clientFactory;
         }
 
         public async Task<AsteroidObservationServiceResponse> GetObservationsAsync(AsteroidObservationServiceRequest asteroidObservationRequest)
         {
-            if (asteroidObservationRequest == null || !string.IsNullOrWhiteSpace(asteroidObservationRequest.Number))
+            if (asteroidObservationRequest == null || string.IsNullOrWhiteSpace(asteroidObservationRequest.Number))
             {
-                return new AsteroidObservationServiceResponse { Observations = new List<AsteroidObservation>() };
+                return new AsteroidObservationServiceResponse { Number = asteroidObservationRequest.Number, Observations = new List<AsteroidObservation>() };
             }
 
             // TODO Tidy this up
@@ -38,15 +38,16 @@ namespace GlasgowAstro.Obsy.Services
 
             var requestUri = QueryHelpers.AddQueryString("/search_db", queryArguments);
 
-            var result = await _httpClient.GetAsync(requestUri);
+            var httpClient = _clientFactory.CreateClient("MpcClient");
+            var result = await httpClient.GetAsync(requestUri);
 
             if (result.IsSuccessStatusCode)
             {                
                 var observations = JsonSerializer.Deserialize<List<AsteroidObservation>>(await result.Content.ReadAsStringAsync());
-                return new AsteroidObservationServiceResponse { Observations = observations };
+                return new AsteroidObservationServiceResponse { Number = asteroidObservationRequest.Number, Observations = observations };
             }
 
-            return new AsteroidObservationServiceResponse { Observations = new List<AsteroidObservation>() };
+            return new AsteroidObservationServiceResponse { Number = asteroidObservationRequest.Number, Observations = new List<AsteroidObservation>() };
         }
 
     }
