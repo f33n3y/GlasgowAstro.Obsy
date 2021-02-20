@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using GlasgowAstro.Obsy.Api.Models.Request;
+using GlasgowAstro.Obsy.Api.Models.Response;
 using GlasgowAstro.Obsy.Services.Models.Request;
+using GlasgowAstro.Obsy.Services.Models.Response;
 
 namespace GlasgowAstro.Obsy.Api.MapperProfiles
 {
@@ -8,7 +10,8 @@ namespace GlasgowAstro.Obsy.Api.MapperProfiles
     {
         public ObservationProfile()
         {
-            CreateMap<ObservationRequest, ObservationServiceRequest>();
+            CreateMap<ObservationRequest, AsteroidObservationServiceRequest>();
+            CreateMap<AsteroidObservationServiceResponse, ObservationResponse>();
         }
     }
 }
