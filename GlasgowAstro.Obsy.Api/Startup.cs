@@ -52,14 +52,13 @@ namespace GlasgowAstro.Obsy.Api
             var authToken = Encoding.ASCII.GetBytes(
                 $"{Configuration.GetValue<string>("MpcUsername")}:{Configuration.GetValue<string>("MpcPassword")}");
             
-            services.AddHttpClient("MpcClient", c =>
+            services.AddHttpClient<IAsteroidObservationService, AsteroidObservationService>(c =>
             {
                 c.BaseAddress = new Uri(Configuration.GetValue<string>("MpcBaseUrl"));
                 c.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
                     Convert.ToBase64String(authToken));
             });
             
-
             services.AddAutoMapper(typeof(AsteroidProfile), typeof(ObservationProfile));
             services.AddSingleton(typeof(IMongoRepository<>), typeof(MongoRepository<>));
             services.AddSingleton<IAsteroidDataService, AsteroidDataService>();
