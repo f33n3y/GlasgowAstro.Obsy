@@ -2,6 +2,7 @@
 using Discord.Commands;
 using GlasgowAstro.Obsy.Bot.Services;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.Bot.Modules
@@ -19,26 +20,39 @@ namespace GlasgowAstro.Obsy.Bot.Modules
         [Summary("Returns previous observations for an asteroid")]
         public async Task GetObservationsAsync([Summary("The asteroid's number")] string asteroidNum)
         {
-            // TESTING
             try
             {
                 var result = await _obsyApiClient.ObservationsAsync(asteroidNum);
 
-                //var fields = new EmbedFieldBuilder(); // TODO                    
+                //if (result.) // TODO
 
-                var embed = new EmbedBuilder() //TODO Move embed building elsewhere
-                    .WithTitle($"Recent observations for {asteroidNum}")
+                //TODO Move field building elsewhere
+                var fieldBuilders = new List<EmbedFieldBuilder>();
+                foreach (var observation in result.Observations)
+                {
+                    var builder = new EmbedFieldBuilder();
+                    builder.Name = $"Observation: {observation.ObservationDate}";
+                    builder.Value = $"Observatory code: {observation.ObservatoryCode}";
+                    fieldBuilders.Add(builder);
+                }
+
+
+                //TODO Move embed building elsewhere
+                var embed = new EmbedBuilder()
+                    .WithTitle($"Recent observations for {asteroidNum}")  //...
                     .WithFooter(footer => footer.Text = "Obsy, a GlasgowAstro bot")
+                    .WithThumbnailUrl("https://www.glasgowastro.co.uk/images/logo.jpg")
                     .WithCurrentTimestamp()
-                    .WithColor(Color.Green)                    
-                    .AddField("Observations", result)                    
+                    .WithColor(new Color(0xE7AB1F))
+                    .WithFields(fieldBuilders)
                     .Build();
 
                 await ReplyAsync(embed: embed);
             }
             catch (Exception e)
             {
-                var bla = ""; // TODO
+                // TODO Logging
+                await ReplyAsync("We have a problem!");
             }
 
         }
