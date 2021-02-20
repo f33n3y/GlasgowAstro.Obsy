@@ -253,8 +253,38 @@ namespace GlasgowAstro.Obsy.Bot.Services
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.7.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class Observation
+    {
+        [Newtonsoft.Json.JsonProperty("designation", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Designation { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("discoveryFlag", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string DiscoveryFlag { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("number", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Number { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("objectType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ObjectType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("observationDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ObservationDate { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("observatoryCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ObservatoryCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("originalRecord", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OriginalRecord { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.3.7.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class ObservationResponse
     {
+        [Newtonsoft.Json.JsonProperty("observations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<Observation> Observations { get; set; }
+
 
     }
 
