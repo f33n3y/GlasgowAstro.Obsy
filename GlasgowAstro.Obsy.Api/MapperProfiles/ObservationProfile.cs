@@ -11,7 +11,8 @@ namespace GlasgowAstro.Obsy.Api.MapperProfiles
         public ObservationProfile()
         {
             CreateMap<ObservationRequest, AsteroidObservationServiceRequest>();
-            CreateMap<AsteroidObservationServiceResponse, ObservationResponse>();
+            CreateMap<AsteroidObservation, Observation>();
+            CreateMap<AsteroidObservationServiceResponse, ObservationResponse>();                
         }
     }
 }
