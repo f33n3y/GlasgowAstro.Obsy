@@ -7,6 +7,6 @@ namespace GlasgowAstro.Obsy.Services.Abstractions
 {
     public interface IAsteroidObservationService
     {
-        Task<AsteroidObservationResponse> GetObservationsAsync(ObservationServiceRequest asteroidObservationRequest);
+        Task<AsteroidObservationServiceResponse> GetObservationsAsync(AsteroidObservationServiceRequest asteroidObservationRequest);
     }
 }
