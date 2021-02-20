@@ -11,5 +11,9 @@ namespace GlasgowAstro.Obsy.Bot.Modules
         [Command("noot")]
         [Summary("Makes pingu noot")]
         public Task NootAsync() => ReplyAsync("Noot Noot! 🐧");
+
+        [Command("hello")]
+        [Summary("Says hello")]
+        public Task HelloAsync() => ReplyAsync("Hello friend");
     }
 }
