@@ -2,7 +2,7 @@ using NUnit.Framework;
 
 namespace GlasgowAstro.Obsy.Tests
 {
-    public class Tests
+    public class AsteroidObservationServiceTests
     {
         [SetUp]
         public void Setup()
