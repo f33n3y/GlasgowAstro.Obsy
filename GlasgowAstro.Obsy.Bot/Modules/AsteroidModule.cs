@@ -36,10 +36,9 @@ namespace GlasgowAstro.Obsy.Bot.Modules
                     fieldBuilders.Add(builder);
                 }
 
-
                 //TODO Move embed building elsewhere
                 var embed = new EmbedBuilder()
-                    .WithTitle($"Recent observations for {asteroidNum}")  //...
+                    .WithTitle($"Recent observations for {result.Number}")
                     .WithFooter(footer => footer.Text = "Obsy, a GlasgowAstro bot")
                     .WithThumbnailUrl("https://www.glasgowastro.co.uk/images/logo.jpg")
                     .WithCurrentTimestamp()
