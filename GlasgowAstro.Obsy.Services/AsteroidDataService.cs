@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.Services
 {
+    /// <summary>
+    /// NOT IN USE AT THE MOMENT AND LIKELY IN BORKED STATE
+    /// </summary>
     public class AsteroidDataService : IAsteroidDataService
     {
         private readonly IMongoRepository<Asteroid> _asteroidRepository;

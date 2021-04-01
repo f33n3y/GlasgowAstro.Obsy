@@ -18,10 +18,10 @@ namespace GlasgowAstro.Obsy.Api.Controllers
     [Authorize]
     public class AsteroidsController : ControllerBase
     {
-        private readonly IAsteroidObservationService _observationService;
+        private readonly IAsteroidService _observationService;
         private readonly IMapper _mapper;
 
-        public AsteroidsController(IAsteroidDataService asteroidService, IAsteroidObservationService observationService, IMapper mapper)
+        public AsteroidsController(IAsteroidDataService asteroidService, IAsteroidService observationService, IMapper mapper)
         {
             _observationService = observationService;
             _mapper = mapper;
@@ -36,8 +36,8 @@ namespace GlasgowAstro.Obsy.Api.Controllers
         {
             try
             {
-                var serviceRequestModel = _mapper.Map<AsteroidObservationServiceRequest>(obsySearchRequest);                
-                var serviceResponse = await _observationService.GetObservationsAsync(serviceRequestModel);
+                var serviceRequestModel = _mapper.Map<AsteroidObservationDataRequest>(obsySearchRequest);                
+                var serviceResponse = await _observationService.GetObservationsAsync(serviceRequestModel);                
 
                 if (serviceResponse == null || serviceResponse?.Observations.Count < 1)
                 {

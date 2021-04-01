@@ -1,6 +1,6 @@
 ﻿namespace GlasgowAstro.Obsy.Services.Models.Request
 {
-    public class AsteroidObservationServiceRequest
+    public class AsteroidOrbitDataRequest
     {
         public string Number { get; set; }
     }

@@ -2,7 +2,7 @@
 
 namespace GlasgowAstro.Obsy.Services.Models.Response
 {
-    public class AsteroidObservationServiceResponse
+    public class AsteroidObservationDataResponse
     {
         public string Number { get; set; }
 
