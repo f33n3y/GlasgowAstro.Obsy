@@ -1,8 +1,8 @@
 ﻿using Discord;
 using Discord.Commands;
+using GlasgowAstro.Obsy.Bot.EmbedBuilders;
 using GlasgowAstro.Obsy.Bot.Services;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.Bot.Modules
@@ -25,26 +25,18 @@ namespace GlasgowAstro.Obsy.Bot.Modules
                 var result = await _obsyApiClient.ObservationsAsync(asteroidNum);
 
                 //if (result.) // TODO
-
-                //TODO Move field building elsewhere
-                var fieldBuilders = new List<EmbedFieldBuilder>();
+                
+                var embedFieldsList = EmbedFactory.CreateEmbedList();
                 foreach (var observation in result.Observations)
                 {
-                    var builder = new EmbedFieldBuilder();
-                    builder.Name = $"Observation: {observation.ObservationDate}";
-                    builder.Value = $"Observatory code: {observation.ObservatoryCode}";
-                    fieldBuilders.Add(builder);
+                    var embedField = EmbedFactory.CreateEmbedField($"Observation: {observation.ObservationDate}", 
+                        $"Observatory code: {observation.ObservatoryCode}");
+                    embedFieldsList.Add(embedField);
                 }
 
-                //TODO Move embed building elsewhere
-                var embed = new EmbedBuilder()
-                    .WithTitle($"Recent observations for {result.Number}")
-                    .WithFooter(footer => footer.Text = "Obsy, a GlasgowAstro bot")
-                    .WithThumbnailUrl("https://www.glasgowastro.co.uk/images/logo.jpg")
-                    .WithCurrentTimestamp()
-                    .WithColor(new Color(0xE7AB1F))
-                    .WithFields(fieldBuilders)
-                    .Build();
+                var embed = EmbedFactory.CreateEmbedWithFields($"Recent observations for {result.Number}",
+                    "Obsy, a GlasgowAstro bot", "https://www.glasgowastro.co.uk/images/logo.jpg", new Color(0xE7AB1F),
+                    embedFieldsList);
 
                 await ReplyAsync(embed: embed);
             }
