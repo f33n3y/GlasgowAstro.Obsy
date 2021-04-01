@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlasgowAstro.Obsy.Bot", "Gl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlasgowAstro.Obsy.Services", "GlasgowAstro.Obsy.Services\GlasgowAstro.Obsy.Services.csproj", "{19EBAB32-B573-414B-9489-76CE68C742D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlasgowAstro.Obsy.Tests", "GlasgowAstro.Obsy.Tests\GlasgowAstro.Obsy.Tests.csproj", "{EE4CBC76-F3D2-4090-9B6A-8F9E7AAE3796}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlasgowAstro.Obsy.Tests", "GlasgowAstro.Obsy.Tests\GlasgowAstro.Obsy.Tests.csproj", "{3D184DB9-46D7-4420-9329-33BE94EB6BA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{19EBAB32-B573-414B-9489-76CE68C742D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19EBAB32-B573-414B-9489-76CE68C742D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19EBAB32-B573-414B-9489-76CE68C742D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE4CBC76-F3D2-4090-9B6A-8F9E7AAE3796}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE4CBC76-F3D2-4090-9B6A-8F9E7AAE3796}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE4CBC76-F3D2-4090-9B6A-8F9E7AAE3796}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE4CBC76-F3D2-4090-9B6A-8F9E7AAE3796}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D184DB9-46D7-4420-9329-33BE94EB6BA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D184DB9-46D7-4420-9329-33BE94EB6BA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D184DB9-46D7-4420-9329-33BE94EB6BA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D184DB9-46D7-4420-9329-33BE94EB6BA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
