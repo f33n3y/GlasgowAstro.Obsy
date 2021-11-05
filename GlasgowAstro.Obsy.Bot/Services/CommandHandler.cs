@@ -24,7 +24,7 @@ namespace GlasgowAstro.Obsy.Bot.Services
         {
             // Check message is a valid command and is not from another bot
             var message = socketMsg as SocketUserMessage;
-            if (message == null) return;
+            if (message is null) return;
 
             int argPos = 0;
             if (!(message.HasCharPrefix('!', ref argPos) ||

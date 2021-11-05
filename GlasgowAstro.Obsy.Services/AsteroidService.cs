@@ -4,9 +4,8 @@ using GlasgowAstro.Obsy.Services.Models.Response;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Text.Json;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.Services
 {
@@ -26,7 +25,7 @@ namespace GlasgowAstro.Obsy.Services
         /// <returns></returns>
         public async Task<AsteroidObservationDataResponse> GetObservationsAsync(AsteroidObservationDataRequest asteroidObservationDataRequest)
         {
-            if (asteroidObservationDataRequest == null || string.IsNullOrWhiteSpace(asteroidObservationDataRequest.Number))
+            if (asteroidObservationDataRequest is null || string.IsNullOrWhiteSpace(asteroidObservationDataRequest.Number))
             {
                 return new AsteroidObservationDataResponse { Number = asteroidObservationDataRequest.Number, Observations = new List<AsteroidObservation>() };
             }
@@ -62,7 +61,7 @@ namespace GlasgowAstro.Obsy.Services
         /// <returns></returns>
         public async Task<AsteroidOrbitDataResponse> GetOrbitDataAsync(AsteroidOrbitDataRequest asteroidOrbitDataRequest)
         {
-            if (asteroidOrbitDataRequest == null || string.IsNullOrWhiteSpace(asteroidOrbitDataRequest.Number))
+            if (asteroidOrbitDataRequest is null || string.IsNullOrWhiteSpace(asteroidOrbitDataRequest.Number))
             {
                 return new AsteroidOrbitDataResponse { OrbitData = new AsteroidOrbitData { AbsoluteMagnitude = string.Empty } };
             }

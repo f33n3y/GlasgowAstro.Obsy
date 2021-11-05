@@ -39,7 +39,7 @@ namespace GlasgowAstro.Obsy.Api.Controllers
                 var serviceRequestModel = _mapper.Map<AsteroidObservationDataRequest>(obsySearchRequest);                
                 var serviceResponse = await _observationService.GetObservationsAsync(serviceRequestModel);                
 
-                if (serviceResponse == null || serviceResponse?.Observations.Count < 1)
+                if (serviceResponse is null || serviceResponse?.Observations.Count < 1)
                 {
                     return NotFound();
                 }
