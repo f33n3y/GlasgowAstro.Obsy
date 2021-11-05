@@ -18,12 +18,12 @@ namespace GlasgowAstro.Obsy.Api.Controllers
     [Authorize]
     public class AsteroidsController : ControllerBase
     {
-        private readonly IAsteroidService _observationService;
+        private readonly IAsteroidService _asteroidService;
         private readonly IMapper _mapper;
 
         public AsteroidsController(IAsteroidService observationService, IMapper mapper)
         {
-            _observationService = observationService;
+            _asteroidService = observationService;
             _mapper = mapper;
         }
 
@@ -37,7 +37,7 @@ namespace GlasgowAstro.Obsy.Api.Controllers
             try
             {
                 var serviceRequestModel = _mapper.Map<AsteroidObservationDataRequest>(obsySearchRequest);                
-                var serviceResponse = await _observationService.GetObservationsAsync(serviceRequestModel);                
+                var serviceResponse = await _asteroidService.GetObservationsAsync(serviceRequestModel);                
 
                 if (serviceResponse is null || serviceResponse?.Observations.Count < 1)
                 {
@@ -45,10 +45,35 @@ namespace GlasgowAstro.Obsy.Api.Controllers
                 }
 
                 var observationResponse = _mapper.Map<ObservationResponse>(serviceResponse);
-
                 return Ok(observationResponse);
 
             }
+            catch (Exception e)
+            {
+                // TODO logging ...
+                return NotFound();
+            }
+        }
+
+        [HttpGet("/orbits")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<OrbitResponse>> FindOrbitDataAsync([FromQuery] OrbitRequest orbitSearchRequest)
+        {
+            try
+            {
+                var serviceRequestModel = _mapper.Map<AsteroidOrbitDataRequest>(orbitSearchRequest);
+                var serviceResponse = await _asteroidService.GetOrbitDataAsync(serviceRequestModel);
+
+                if (serviceResponse is null || !string.IsNullOrWhiteSpace(serviceResponse.OrbitData?.AbsoluteMagnitude))
+                {
+                    return NotFound();
+                }
+
+                var orbitResponse = _mapper.Map<OrbitResponse>(serviceResponse);
+                return Ok(orbitResponse);
+            } 
             catch (Exception e)
             {
                 // TODO logging ...
