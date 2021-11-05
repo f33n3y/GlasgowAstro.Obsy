@@ -3,17 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlasgowAstro.Obsy.DataGrabber", "GlasgowAstro.Obsy.DataGrabber\GlasgowAstro.Obsy.DataGrabber.csproj", "{3351E7C1-46B6-4BF8-B1C5-F006DC6052F9}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlasgowAstro.Obsy.Api", "GlasgowAstro.Obsy.Api\GlasgowAstro.Obsy.Api.csproj", "{FE6289F8-86FE-4542-A290-C73291C705B3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlasgowAstro.Obsy.Data", "GlasgowAstro.Obsy.Data\GlasgowAstro.Obsy.Data.csproj", "{9F7D7756-F3A7-4953-9FB1-C7830F425EC3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlasgowAstro.Obsy.Bot", "GlasgowAstro.Obsy.Bot\GlasgowAstro.Obsy.Bot.csproj", "{2FD34972-818F-4AF8-8F26-CF2AC4017D71}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlasgowAstro.Obsy.Services", "GlasgowAstro.Obsy.Services\GlasgowAstro.Obsy.Services.csproj", "{19EBAB32-B573-414B-9489-76CE68C742D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlasgowAstro.Obsy.Tests", "GlasgowAstro.Obsy.Tests\GlasgowAstro.Obsy.Tests.csproj", "{3D184DB9-46D7-4420-9329-33BE94EB6BA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlasgowAstro.Obsy.Tests", "GlasgowAstro.Obsy.Tests\GlasgowAstro.Obsy.Tests.csproj", "{3D184DB9-46D7-4420-9329-33BE94EB6BA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,18 +17,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3351E7C1-46B6-4BF8-B1C5-F006DC6052F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3351E7C1-46B6-4BF8-B1C5-F006DC6052F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3351E7C1-46B6-4BF8-B1C5-F006DC6052F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3351E7C1-46B6-4BF8-B1C5-F006DC6052F9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FE6289F8-86FE-4542-A290-C73291C705B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FE6289F8-86FE-4542-A290-C73291C705B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE6289F8-86FE-4542-A290-C73291C705B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE6289F8-86FE-4542-A290-C73291C705B3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9F7D7756-F3A7-4953-9FB1-C7830F425EC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9F7D7756-F3A7-4953-9FB1-C7830F425EC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9F7D7756-F3A7-4953-9FB1-C7830F425EC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9F7D7756-F3A7-4953-9FB1-C7830F425EC3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2FD34972-818F-4AF8-8F26-CF2AC4017D71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2FD34972-818F-4AF8-8F26-CF2AC4017D71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FD34972-818F-4AF8-8F26-CF2AC4017D71}.Release|Any CPU.ActiveCfg = Release|Any CPU

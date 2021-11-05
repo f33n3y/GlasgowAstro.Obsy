@@ -60,8 +60,6 @@ namespace GlasgowAstro.Obsy.Api
             });
             
             services.AddAutoMapper(typeof(AsteroidProfile), typeof(ObservationProfile));
-            services.AddSingleton(typeof(IMongoRepository<>), typeof(MongoRepository<>));
-            services.AddSingleton<IAsteroidDataService, AsteroidDataService>();
             services.AddSingleton<IAsteroidService, AsteroidService>();
         }
 

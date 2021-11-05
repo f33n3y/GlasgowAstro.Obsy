@@ -21,7 +21,7 @@ namespace GlasgowAstro.Obsy.Api.Controllers
         private readonly IAsteroidService _observationService;
         private readonly IMapper _mapper;
 
-        public AsteroidsController(IAsteroidDataService asteroidService, IAsteroidService observationService, IMapper mapper)
+        public AsteroidsController(IAsteroidService observationService, IMapper mapper)
         {
             _observationService = observationService;
             _mapper = mapper;
