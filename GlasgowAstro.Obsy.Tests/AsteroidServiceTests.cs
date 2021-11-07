@@ -83,7 +83,7 @@ namespace GlasgowAstro.Obsy.Tests
 
             // Assert
             result.Should().BeOfType<AsteroidOrbitDataResponse>()
-                .Which.OrbitData.AbsoluteMagnitude.Should().NotBeNullOrWhiteSpace();
+                .Which.OrbitData.Should().NotBeEmpty();
         }
 
     }
