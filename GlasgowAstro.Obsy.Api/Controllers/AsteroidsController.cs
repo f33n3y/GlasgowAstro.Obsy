@@ -66,7 +66,7 @@ namespace GlasgowAstro.Obsy.Api.Controllers
                 var serviceRequestModel = _mapper.Map<AsteroidOrbitDataRequest>(orbitSearchRequest);
                 var serviceResponse = await _asteroidService.GetOrbitDataAsync(serviceRequestModel);
 
-                if (serviceResponse is null || !string.IsNullOrWhiteSpace(serviceResponse.OrbitData?.AbsoluteMagnitude))
+                if (serviceResponse is null || serviceResponse.OrbitData.Count < 1)
                 {
                     return NotFound();
                 }

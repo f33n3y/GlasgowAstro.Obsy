@@ -1,7 +1,11 @@
-﻿namespace GlasgowAstro.Obsy.Services.Models.Response
+﻿using System.Collections.Generic;
+
+namespace GlasgowAstro.Obsy.Services.Models.Response
 {
     public class AsteroidOrbitDataResponse
     {
-        public AsteroidOrbitData OrbitData { get; set; }
+        public string Number { get; set; }
+
+        public List<AsteroidOrbit> OrbitData { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace GlasgowAstro.Obsy.Services.Models.Response
 {
-    public class AsteroidOrbitData
+    public class AsteroidOrbit
     {
         [JsonPropertyName("absolute_magnitude")]
         public string AbsoluteMagnitude { get; set; }

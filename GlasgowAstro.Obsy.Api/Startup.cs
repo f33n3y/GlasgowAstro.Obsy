@@ -1,11 +1,7 @@
-using AutoMapper;
 using GlasgowAstro.Obsy.Api.Authentication;
 using GlasgowAstro.Obsy.Api.MapperProfiles;
-using GlasgowAstro.Obsy.Data;
-using GlasgowAstro.Obsy.Data.Abstractions;
 using GlasgowAstro.Obsy.Services;
 using GlasgowAstro.Obsy.Services.Abstractions;
-using GlasgowAstro.Obsy.Services.MapperProfiles;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -59,7 +55,7 @@ namespace GlasgowAstro.Obsy.Api
                     Convert.ToBase64String(authToken));
             });
             
-            services.AddAutoMapper(typeof(AsteroidProfile), typeof(ObservationProfile));
+            services.AddAutoMapper(typeof(ObservationProfile), typeof(OrbitProfile));
             services.AddSingleton<IAsteroidService, AsteroidService>();
         }
 

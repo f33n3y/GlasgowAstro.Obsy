@@ -63,9 +63,10 @@ namespace GlasgowAstro.Obsy.Services
         {
             if (asteroidOrbitDataRequest is null || string.IsNullOrWhiteSpace(asteroidOrbitDataRequest.Number))
             {
-                return new AsteroidOrbitDataResponse { OrbitData = new AsteroidOrbitData { AbsoluteMagnitude = string.Empty } };
+                return new AsteroidOrbitDataResponse { Number = asteroidOrbitDataRequest.Number, OrbitData = new List<AsteroidOrbit>() };
             }
 
+            // TODO Tidy this up
             var queryArguments = new Dictionary<string, string>()
             {
                 { "number", asteroidOrbitDataRequest.Number },
@@ -79,11 +80,11 @@ namespace GlasgowAstro.Obsy.Services
 
             if (result.IsSuccessStatusCode)
             {
-                var orbitData = JsonSerializer.Deserialize<AsteroidOrbitData>(await result.Content.ReadAsStringAsync());
-                return new AsteroidOrbitDataResponse { OrbitData = orbitData };
+                var orbitData = JsonSerializer.Deserialize<List<AsteroidOrbit>>(await result.Content.ReadAsStringAsync());
+                return new AsteroidOrbitDataResponse { Number = asteroidOrbitDataRequest.Number, OrbitData = orbitData };
             }
 
-            return new AsteroidOrbitDataResponse { OrbitData = new AsteroidOrbitData { AbsoluteMagnitude = string.Empty } };
+            return new AsteroidOrbitDataResponse { Number = asteroidOrbitDataRequest.Number, OrbitData = new List<AsteroidOrbit>() };
         }
     }
 }
