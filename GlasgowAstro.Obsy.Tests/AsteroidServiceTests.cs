@@ -1,17 +1,17 @@
-using GlasgowAstro.Obsy.Services.Abstractions;
-using System;
-using Xunit;
-using FluentAssertions;
-using NSubstitute;
 using AutoFixture;
-using System.Threading.Tasks;
+using FluentAssertions;
+using GlasgowAstro.Obsy.Services;
+using GlasgowAstro.Obsy.Services.Contracts;
 using GlasgowAstro.Obsy.Services.Models.Request;
 using GlasgowAstro.Obsy.Services.Models.Response;
-using System.Net.Http;
+using NSubstitute;
+using System;
 using System.Net;
-using System.Text.Json;
+using System.Net.Http;
 using System.Text;
-using GlasgowAstro.Obsy.Services;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace GlasgowAstro.Obsy.Tests
 {

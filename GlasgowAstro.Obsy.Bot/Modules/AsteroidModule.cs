@@ -9,7 +9,7 @@ namespace GlasgowAstro.Obsy.Bot.Modules
 {
     public class AsteroidModule : ModuleBase<SocketCommandContext>
     {
-        private readonly ObsyApiClient _obsyApiClient;
+        private readonly ObsyApiClient _obsyApiClient; // Change this to inject facade instead
 
         public AsteroidModule(ObsyApiClient obsyApiClient)
         {

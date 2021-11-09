@@ -2,7 +2,7 @@
 using GlasgowAstro.Obsy.Services.Models.Response;
 using System.Threading.Tasks;
 
-namespace GlasgowAstro.Obsy.Services.Abstractions
+namespace GlasgowAstro.Obsy.Services.Contracts
 {
     public interface IAsteroidService
     {
