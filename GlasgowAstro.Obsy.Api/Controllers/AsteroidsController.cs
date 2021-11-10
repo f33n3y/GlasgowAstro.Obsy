@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using GlasgowAstro.Obsy.Api.Models.Request;
 using GlasgowAstro.Obsy.Api.Models.Response;
-using GlasgowAstro.Obsy.Services.Abstractions;
+using GlasgowAstro.Obsy.Services.Contracts;
 using GlasgowAstro.Obsy.Services.Models.Request;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

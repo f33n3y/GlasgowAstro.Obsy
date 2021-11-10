@@ -1,7 +1,7 @@
 using GlasgowAstro.Obsy.Api.Authentication;
 using GlasgowAstro.Obsy.Api.MapperProfiles;
 using GlasgowAstro.Obsy.Services;
-using GlasgowAstro.Obsy.Services.Abstractions;
+using GlasgowAstro.Obsy.Services.Contracts;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
