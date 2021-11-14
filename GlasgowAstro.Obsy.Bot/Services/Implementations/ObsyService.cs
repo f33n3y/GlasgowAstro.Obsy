@@ -1,9 +1,11 @@
-﻿using GlasgowAstro.Obsy.Bot.Services.Contracts;
+﻿using GlasgowAstro.Obsy.Bot.Helpers;
+using GlasgowAstro.Obsy.Bot.Models;
+using GlasgowAstro.Obsy.Bot.Services.Contracts;
+using System;
+using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.Bot.Services.Implementations
 {
-    // TODO: A facade method that takes asteroid number and uses ObsyApiClient to call both 
-    // the Observation and Orbit data endpoints and gather all the data needed for Discord embed card
     public class ObsyService : IObsyService
     {
         private readonly ObsyApiClient _obsyApiClient;
@@ -13,6 +15,35 @@ namespace GlasgowAstro.Obsy.Bot.Services.Implementations
             _obsyApiClient = obsyApiClient;
         }
 
+        public async Task<AsteroidData> GetAsteroidData(string asteroidNum)
+        {
+            var asteroidData = new AsteroidData();
+            var observationsCall = _obsyApiClient.ObservationsAsync(asteroidNum);
+            var orbitCall = _obsyApiClient.OrbitsAsync(asteroidNum);
 
+            try
+            {
+                var (observationData, orbitData) = await TaskExt.WhenAll(observationsCall, orbitCall);
+
+                if (observationData.Status == TaskStatus.RanToCompletion)
+                {
+                    var result = observationData.Result;
+                    //asteroidData.Number = result.Number;
+                    // ...
+                }
+
+                if (orbitData.Status == TaskStatus.RanToCompletion)
+                {
+                    var result = orbitCall.Result;
+                    // ...
+                }
+            }
+            catch (Exception e)
+            {                
+                // TODO Logging
+            }
+
+            return new AsteroidData();            
+        }
     }
 }
