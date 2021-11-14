@@ -4,6 +4,8 @@ A .NET Core Discord bot and API for retrieving asteroid orbit data from the Mino
 ## Status
 Pre-alpha
 
+[![build](https://github.com/f33n3y/GlasgowAstro.Obsy/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/f33n3y/GlasgowAstro.Obsy/actions/workflows/build.yml)
+
 ##
 - https://www.instagram.com/glasgowastro
 - https://glasgowastro.co.uk
