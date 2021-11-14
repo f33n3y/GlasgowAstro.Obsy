@@ -55,6 +55,7 @@ namespace GlasgowAstro.Obsy.Api.Controllers
             }
         }
 
+        // GET api/asteroids/orbits
         [HttpGet("/orbits")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
