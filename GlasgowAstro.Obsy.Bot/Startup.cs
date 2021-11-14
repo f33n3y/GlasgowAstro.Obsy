@@ -2,6 +2,8 @@
 using Discord.WebSocket;
 using GlasgowAstro.Obsy.Bot.Models;
 using GlasgowAstro.Obsy.Bot.Services;
+using GlasgowAstro.Obsy.Bot.Services.Contracts;
+using GlasgowAstro.Obsy.Bot.Services.Implementations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -56,6 +58,7 @@ namespace GlasgowAstro.Obsy.Bot
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
                     Convert.ToBase64String(authToken));
             serviceCollection.AddSingleton(new ObsyApiClient(config.GetValue<string>("ObsyApiBaseUrl"), httpClient));
+            serviceCollection.AddSingleton<IObsyService, ObsyService>();
 
             serviceCollection.Configure<BotSettings>(config.GetSection("BotSettings"));
             serviceCollection.AddSingleton(resolver => resolver.GetRequiredService<IOptions<BotSettings>>().Value);    
