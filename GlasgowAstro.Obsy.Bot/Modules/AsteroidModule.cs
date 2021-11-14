@@ -2,6 +2,7 @@
 using Discord.Commands;
 using GlasgowAstro.Obsy.Bot.EmbedBuilders;
 using GlasgowAstro.Obsy.Bot.Services;
+using GlasgowAstro.Obsy.Bot.Services.Contracts;
 using System;
 using System.Threading.Tasks;
 
@@ -9,11 +10,13 @@ namespace GlasgowAstro.Obsy.Bot.Modules
 {
     public class AsteroidModule : ModuleBase<SocketCommandContext>
     {
-        private readonly ObsyApiClient _obsyApiClient; // Change this to inject facade instead
+        private readonly ObsyApiClient _obsyApiClient; // TODO Remove this once facade implementation complete
+        private readonly IObsyService _obsyService;
 
-        public AsteroidModule(ObsyApiClient obsyApiClient)
+        public AsteroidModule(ObsyApiClient obsyApiClient, IObsyService obsyService)
         {
             _obsyApiClient = obsyApiClient;
+            _obsyService = obsyService;
         }
 
         [Command("obsy")]
@@ -23,9 +26,10 @@ namespace GlasgowAstro.Obsy.Bot.Modules
             try
             {
                 var result = await _obsyApiClient.ObservationsAsync(asteroidNum);
+                // TODO 
+                //var asteroidData = await _obsyService.GetAsteroidData(asteroidNum);
+                //if (asteroidData == null || asteroidData...)                
 
-                //if (result.) // TODO
-                
                 var embedFieldsList = EmbedFactory.CreateEmbedList();
                 foreach (var observation in result.Observations)
                 {
