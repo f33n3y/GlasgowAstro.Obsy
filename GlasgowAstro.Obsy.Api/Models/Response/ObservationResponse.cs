@@ -6,6 +6,8 @@ namespace GlasgowAstro.Obsy.Api.Models.Response
     {
         public string Number { get; set; }
 
-        public List<Observation> Observations { get; set; }
+        private readonly List<Observation> _observations = new List<Observation>();
+
+        public List<Observation> Observations { get { return _observations; } }
     }
 }

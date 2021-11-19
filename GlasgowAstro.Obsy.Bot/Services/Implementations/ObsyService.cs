@@ -2,6 +2,7 @@
 using GlasgowAstro.Obsy.Bot.Models;
 using GlasgowAstro.Obsy.Bot.Services.Contracts;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.Bot.Services.Implementations
@@ -15,27 +16,33 @@ namespace GlasgowAstro.Obsy.Bot.Services.Implementations
             _obsyApiClient = obsyApiClient;
         }
 
-        public async Task<AsteroidData> GetAsteroidData(string asteroidNum)
+        public async Task<AsteroidBotEmbedData> GetAsteroidData(string asteroidNum)
         {
-            var asteroidData = new AsteroidData();
-            var observationsCall = _obsyApiClient.ObservationsAsync(asteroidNum);
-            var orbitCall = _obsyApiClient.OrbitsAsync(asteroidNum);
+            var botEmbedData = new AsteroidBotEmbedData();
 
             try
             {
+                var observationsCall = _obsyApiClient.ObservationsAsync(asteroidNum);
+                var orbitCall = _obsyApiClient.OrbitsAsync(asteroidNum);
                 var (observationData, orbitData) = await TaskExt.WhenAll(observationsCall, orbitCall);
 
                 if (observationData.Status == TaskStatus.RanToCompletion)
                 {
-                    var result = observationData.Result;
-                    //asteroidData.Number = result.Number;
-                    // ...
+                    var observationResult = observationData.Result;
+                    // TODO ... Automapper ?
+                    botEmbedData.Number = observationResult.Number;
+                    foreach (var observation in observationResult.Observations)
+                    {
+                    
+                    }    
+                    
                 }
 
                 if (orbitData.Status == TaskStatus.RanToCompletion)
                 {
-                    var result = orbitCall.Result;
-                    // ...
+                    var orbitResult = orbitCall.Result;
+                    botEmbedData.AbsoluteMagnitude = orbitResult.OrbitData.FirstOrDefault()?.AbsoluteMagnitude;
+              
                 }
             }
             catch (Exception e)
@@ -43,7 +50,7 @@ namespace GlasgowAstro.Obsy.Bot.Services.Implementations
                 // TODO Logging
             }
 
-            return new AsteroidData();            
+            return botEmbedData;
         }
     }
 }

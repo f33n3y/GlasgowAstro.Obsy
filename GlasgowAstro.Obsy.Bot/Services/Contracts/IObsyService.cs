@@ -5,6 +5,6 @@ namespace GlasgowAstro.Obsy.Bot.Services.Contracts
 {
     public interface IObsyService
     {
-        Task<AsteroidData> GetAsteroidData(string asteroidNum);
+        Task<AsteroidBotEmbedData> GetAsteroidData(string asteroidNum);
     }
 }

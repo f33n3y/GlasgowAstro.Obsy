@@ -4,6 +4,7 @@ using GlasgowAstro.Obsy.Bot.EmbedBuilders;
 using GlasgowAstro.Obsy.Bot.Services;
 using GlasgowAstro.Obsy.Bot.Services.Contracts;
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.Bot.Modules
@@ -27,8 +28,11 @@ namespace GlasgowAstro.Obsy.Bot.Modules
             {
                 var result = await _obsyApiClient.ObservationsAsync(asteroidNum);
                 // TODO 
-                //var asteroidData = await _obsyService.GetAsteroidData(asteroidNum);
-                //if (asteroidData == null || asteroidData...)                
+                var asteroidData = await _obsyService.GetAsteroidData(asteroidNum);
+                //if (asteroidData == null || asteroidData...)
+                //
+                // TESTING 
+                await ReplyAsync(message:JsonSerializer.Serialize(asteroidData));
 
                 var embedFieldsList = EmbedFactory.CreateEmbedList();
                 foreach (var observation in result.Observations)

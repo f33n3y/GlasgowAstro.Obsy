@@ -1,4 +1,6 @@
-﻿namespace GlasgowAstro.Obsy.Api.Models.Response
+﻿using System.Collections.Generic;
+
+namespace GlasgowAstro.Obsy.Api.Models.Response
 {
     public class Orbit
     {
