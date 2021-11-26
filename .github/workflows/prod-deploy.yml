@@ -1,8 +1,6 @@
 name: prod-deploy.yml
 
-on:
-  push:
-    branches: [ master ]
+on: workflow_dispatch
     
 env:
   AZURE_WEBAPP_PACKAGE_PATH: '.'
