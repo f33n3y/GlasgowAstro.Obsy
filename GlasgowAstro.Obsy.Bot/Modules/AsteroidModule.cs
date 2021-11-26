@@ -27,12 +27,15 @@ namespace GlasgowAstro.Obsy.Bot.Modules
             try
             {
                 var result = await _obsyApiClient.ObservationsAsync(asteroidNum);
-                // TODO 
-                var asteroidData = await _obsyService.GetAsteroidData(asteroidNum);
-                //if (asteroidData == null || asteroidData...)
-                //
-                // TESTING 
-                await ReplyAsync(message:JsonSerializer.Serialize(asteroidData));
+                
+                // TODO Use result of this facade call to populate the Embed data instead
+                var asteroidData = await _obsyService.GetAsteroidData(asteroidNum);                
+                if (asteroidData == null)
+                {
+                    await ReplyAsync("We have a problem!");
+                }
+                await ReplyAsync(message: JsonSerializer.Serialize(asteroidData));
+                // 
 
                 var embedFieldsList = EmbedFactory.CreateEmbedList();
                 foreach (var observation in result.Observations)

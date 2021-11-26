@@ -29,11 +29,14 @@ namespace GlasgowAstro.Obsy.Bot.Services.Implementations
                 if (observationData.Status == TaskStatus.RanToCompletion)
                 {
                     var observationResult = observationData.Result;
-                    // TODO ... Automapper ?
+                    // TODO ... Automapper 
                     botEmbedData.Number = observationResult.Number;
                     foreach (var observation in observationResult.Observations)
                     {
-                    
+                        botEmbedData.Observations.Add(new Models.Observation
+                        {
+                            ObservationDate = observation.ObservationDate
+                        });
                     }    
                     
                 }

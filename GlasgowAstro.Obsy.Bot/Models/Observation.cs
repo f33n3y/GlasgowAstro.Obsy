@@ -2,5 +2,6 @@
 {
     public class Observation
     {
+        public string ObservationDate { get; set; }
     }
 }
