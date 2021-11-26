@@ -1,8 +1,14 @@
 # GlasgowAstro.Obsy
-A .NET Core Discord bot and API for retrieving asteroid orbit data from the Minor Planet Center. A work in progress!
+.NET Discord bot and API for retrieving asteroid orbit data from the Minor Planet Center. 
+A work in progress!
 
 ## Status
 Pre-alpha
+
+Current Discord embed card appearance:
+
+![image](https://user-images.githubusercontent.com/10567052/143660176-3e0684b2-20ca-46d9-ba99-e135623b580e.png)
+
 
 ##
 - https://www.instagram.com/glasgowastro
