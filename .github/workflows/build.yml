@@ -32,12 +32,14 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity normal
       
-    - name: Publish
-      run : dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp' 
-      
-    - name: Deploy
+    - name: Publish API
+      run : dotnet publish $GITHUB_WORKSPACE/GlasgowAstro.Obsy.Api/GlasgowAstro.Obsy.Api.csproj -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp' 
+            
+    - name: Deploy API
       uses: Azure/webapps-deploy@v2
       with:
         app-name: ${{ secrets.AZURE_WEBAPP_NAME  }} 
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }} 
         package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
+        
+    # TODO Publish Bot
