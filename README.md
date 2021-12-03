@@ -7,7 +7,8 @@ Pre-alpha
 
 Current Discord embed card appearance:
 
-![image](https://user-images.githubusercontent.com/10567052/143660176-3e0684b2-20ca-46d9-ba99-e135623b580e.png)
+![image](https://user-images.githubusercontent.com/10567052/144647884-328aac02-9366-444f-8009-cdbc0f9122a6.png)
+
 
 
 ##
