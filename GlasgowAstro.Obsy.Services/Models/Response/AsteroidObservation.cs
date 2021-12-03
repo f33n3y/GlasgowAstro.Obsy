@@ -10,7 +10,8 @@ namespace GlasgowAstro.Obsy.Services.Models.Response
         [JsonPropertyName("discovery_flag")]
         public string DiscoveryFlag { get; set; }
 
-        public string Number { get; set; }
+        [JsonPropertyName("number")]
+        public int Number { get; set; }
 
         [JsonPropertyName("object_type")]
         public string ObjectType { get; set; }
