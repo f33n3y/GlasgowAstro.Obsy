@@ -31,6 +31,9 @@ namespace GlasgowAstro.Obsy.Bot.Modules
 
                 var embedFieldsList = EmbedFactory.CreateEmbedList();
 
+                var magnitudeField = EmbedFactory.CreateEmbedField($"Magnitude: ", result.AbsoluteMagnitude); ;
+                embedFieldsList.Add(magnitudeField);
+
                 foreach (var observation in result.Observations)
                 {
                     var embedField = EmbedFactory.CreateEmbedField($"Observation: {observation.ObservationDate}",
