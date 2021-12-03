@@ -8,6 +8,6 @@ namespace GlasgowAstro.Obsy.Bot.Models
 
         public string AbsoluteMagnitude { get; set; }
 
-        public List<Observation> Observations { get; set; }
+        public List<Observation> Observations { get; set; } = new List<Observation>();
     }
 }

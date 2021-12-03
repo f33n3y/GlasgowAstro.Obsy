@@ -4,19 +4,16 @@ using GlasgowAstro.Obsy.Bot.EmbedBuilders;
 using GlasgowAstro.Obsy.Bot.Services;
 using GlasgowAstro.Obsy.Bot.Services.Contracts;
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.Bot.Modules
 {
     public class AsteroidModule : ModuleBase<SocketCommandContext>
     {
-        private readonly ObsyApiClient _obsyApiClient; // TODO Remove this once facade implementation complete
         private readonly IObsyService _obsyService;
 
-        public AsteroidModule(ObsyApiClient obsyApiClient, IObsyService obsyService)
+        public AsteroidModule(IObsyService obsyService, ObsyApiClient obsyApiClient)
         {
-            _obsyApiClient = obsyApiClient;
             _obsyService = obsyService;
         }
 
@@ -26,26 +23,22 @@ namespace GlasgowAstro.Obsy.Bot.Modules
         {
             try
             {
-                var result = await _obsyApiClient.ObservationsAsync(asteroidNum);
-                
-                // TODO Use result of this facade call to populate the Embed data instead
-                var asteroidData = await _obsyService.GetAsteroidData(asteroidNum);                
-                if (asteroidData == null)
+                var result = await _obsyService.GetAsteroidData(asteroidNum);
+                if (result == null)
                 {
                     await ReplyAsync("We have a problem!");
                 }
-                await ReplyAsync(message: JsonSerializer.Serialize(asteroidData));
-                // 
 
                 var embedFieldsList = EmbedFactory.CreateEmbedList();
+
                 foreach (var observation in result.Observations)
                 {
-                    var embedField = EmbedFactory.CreateEmbedField($"Observation: {observation.ObservationDate}", 
+                    var embedField = EmbedFactory.CreateEmbedField($"Observation: {observation.ObservationDate}",
                         $"Observatory code: {observation.ObservatoryCode}");
                     embedFieldsList.Add(embedField);
                 }
 
-                var embed = EmbedFactory.CreateEmbedWithFields($"Recent observations for {result.Number}",
+                var embed = EmbedFactory.CreateEmbedWithFields($"Asteroid {result.Number}",
                     "Obsy, a GlasgowAstro bot", "https://www.glasgowastro.co.uk/images/logo.jpg", new Color(0xE7AB1F),
                     embedFieldsList);
 

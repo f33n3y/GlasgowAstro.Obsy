@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace GlasgowAstro.Obsy.Bot.Services.Implementations
 {
+    /// <summary>
+    ///  Façade over ObsyApi 
+    /// </summary>
     public class ObsyService : IObsyService
     {
         private readonly ObsyApiClient _obsyApiClient;
@@ -30,26 +33,25 @@ namespace GlasgowAstro.Obsy.Bot.Services.Implementations
                 {
                     var observationResult = observationData.Result;
                     // TODO ... Automapper 
-                    botEmbedData.Number = observationResult.Number;
-                    foreach (var observation in observationResult.Observations)
+                    botEmbedData.Number = observationResult?.Number;
+                    foreach (var observation in observationResult?.Observations)
                     {
                         botEmbedData.Observations.Add(new Models.Observation
                         {
-                            ObservationDate = observation.ObservationDate
+                            ObservationDate = observation?.ObservationDate,
+                            ObservatoryCode = observation?.ObservatoryCode,
                         });
-                    }    
-                    
+                    }
                 }
 
                 if (orbitData.Status == TaskStatus.RanToCompletion)
                 {
                     var orbitResult = orbitCall.Result;
                     botEmbedData.AbsoluteMagnitude = orbitResult.OrbitData.FirstOrDefault()?.AbsoluteMagnitude;
-              
                 }
             }
             catch (Exception e)
-            {                
+            {
                 // TODO Logging
             }
 
