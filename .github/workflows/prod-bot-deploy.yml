@@ -1,0 +1,41 @@
+name: prod-bot-deploy.yml
+
+on: workflow_dispatch
+    
+env:
+  BINARIES: './output/app_data/jobs/continuous/glasgowastro.obsy.bot'
+  ZIP_FILENAME: 'webjob.zip'
+  ZIP_WORKING_DIR: './output'
+  ZIP_FILEPATH: './output/webjob.zip'
+
+jobs:
+  prod-bot-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: Checkout
+      uses: actions/checkout@v2
+      
+    - name: Setup .NET6
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+        
+    - name: Bot - Restore, build & publish 
+      run: |
+        dotnet restore ${{ env.API_PROJECT_PATH }}
+        dotnet build ${{ env.API_PROJECT_PATH }} --configuration Release --no-restore --output ${{env.BINARIES}}
+
+        
+    #- name: Zip
+    #  uses: nguyenquyhy/zip-release@v0.3.0
+    #  with:
+    #    filename: '${{env.ZIP_FILENAME}}'
+    #    workingDirectory:  ${{env.ZIP_WORKING_DIR}}
+    #    exclusions: 'worker.exe app_data/**/unix/*' # skip .exe and Unix runtime as deployment will be to a Windows App Service
+
+    # - name: Webjob - Deploy
+    #  uses: srijken/azure-zip-deploy@v1.0.1
+    #  with:
+    #    zip-file: ${{env.ZIP_FILEPATH}}
+    #    publish-profile: ${{ secrets.WEBJOB_PUBLISH_PROFILE_PROD }}
