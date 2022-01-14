@@ -8,7 +8,7 @@ env:
   API_PROJECT_PATH: '$GITHUB_WORKSPACE/GlasgowAstro.Obsy.Api/GlasgowAstro.Obsy.Api.csproj'
 
 jobs:
-  prod-deploy:
+  prod-api-deploy:
     runs-on: ubuntu-latest
     steps:
     
