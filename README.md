@@ -12,7 +12,6 @@ Current Discord embed card appearance:
 
 
 ##
-- https://www.instagram.com/glasgowastro
 - https://glasgowastro.co.uk
 
 ## Projects
